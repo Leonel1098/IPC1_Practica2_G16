@@ -1,8 +1,7 @@
 package com.company;
 
 
-import com.company.Alumno;
-import com.company.AsignarAlumno;
+
 
 import java.io.*;
 import java.sql.SQLOutput;
@@ -23,7 +22,7 @@ public class main {
 
     public static void main(String[] args) {
         Menu();
-
+        System.out.println("asdfsdfasdf");
     }
 
     //Menu  Principal --
