@@ -1,6 +1,8 @@
+package com.company;
 
 
-//Scanner
+import com.company.Alumno;
+import com.company.AsignarAlumno;
 
 import java.io.*;
 import java.sql.SQLOutput;
@@ -150,7 +152,7 @@ public class main {
                 String Fnac = Datos[3];
                 String Genero = Datos[4];
 
-                //Con nuestros datos, Alumno crear un objeto de tipo Alumno
+                //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
 
                 Alumno nuevo = new Alumno(id, Carne, nombre, Fnac, Genero);
                 //agregamos este objeto a nuestro arreglo
@@ -222,7 +224,7 @@ public class main {
                 String FContrato = Datos[4];
                 String Genero = Datos[5];
 
-                //Con nuestros datos, Alumno crear un objeto de tipo Alumno
+                //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
 
                 Profesor nuevo = new Profesor(id, Registro_de_Personal, nombre, Fnac, FContrato, Genero);
                 //agregamos este objeto a nuestro arreglo
@@ -299,7 +301,7 @@ public class main {
                 int idProfesor = Integer.parseInt(Datos[1]);
 
 
-                //Con nuestros datos, AsignarAlumno crear un objeto de tipo AsignarAlumno
+                //Con nuestros datos, com.company.AsignarAlumno crear un objeto de tipo com.company.AsignarAlumno
 
                 AsignarAlumno nuevo = new AsignarAlumno(idAlumon, idProfesor);
                 //agregamos este objeto a nuestro arreglo

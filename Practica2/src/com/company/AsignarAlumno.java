@@ -1,3 +1,5 @@
+package com.company;
+
 public class AsignarAlumno {
 
     private int idAlumno;

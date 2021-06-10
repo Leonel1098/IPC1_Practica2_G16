@@ -1,3 +1,5 @@
+package com.company;
+
 public class Alumno {
     private int id ;
     private int carne;
