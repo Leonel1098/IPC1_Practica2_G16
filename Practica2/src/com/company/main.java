@@ -1,10 +1,7 @@
 package com.company;
 
-
-
-
 import java.io.*;
-import java.sql.SQLOutput;
+
 import java.util.Scanner;
 
 public class main {
@@ -18,11 +15,26 @@ public class main {
     //Asignacion de Alumnos
     public static AsignarAlumno[] AsignacionesAlumnos = new AsignarAlumno[200];
     static int contadorAsignacionAlunos;
+    //Se crean Los arreglos de objetos
+    static Cursos[] curso = new Cursos[15];
+    static Notas[] notas = new Notas[100];
+    static AsignarProfe[] asignarProfes = new AsignarProfe[30];
+    //Contadores
+    static  int contadorCursos=0;
+    static int contadorNotas = 0;
+    static int  asignarprofcont = 0;
 
 
     public static void main(String[] args) {
         Menu();
-        System.out.println("asdfsdfasdf");
+        CargarCursos();
+        mostrarCursos();
+        CargarNotas();
+        mostrarNotas();
+        AsiganacionProf();
+        mostrarAsiganicionProf();
+        CrearReporteCursos();
+
     }
 
     //Menu  Principal --
@@ -331,6 +343,229 @@ public class main {
 
     }
 
+    public static void CargarCursos () {
+        // ruta en donde stael archivo
+        String ruta;
+        System.out.println("Ingrese la ruta del archivo csv a leer ;");
+
+        ruta = sc.nextLine();
+        // codigo para abrir archivos
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            // OBJETOS PARA ABRIR LOS ARCHIVOS
+            // Una libreria no es mas que una clase que ya esta en JAVA,
+            //entonces cuando importamos "librerias"
+            // Estamos importando una clase
+            archivo = new File(ruta);
+
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+
+            // LEYENDO EL ARCHIVO
+            // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
+            //antes de la lectura
+            String linea = br.readLine();
+            while ((linea = br.readLine()) != null) {
+                // Aqui estamos leyendo fila por fila, entonces vamos a
+                //almacenar esa informacion en nuestro arreglo de Alumnos
+                System.out.println(linea);
+                // Separando los datos por una coma
+                String[] Datos = linea.split(",");
+
+                // Segun la estructura del archivo, sabemos que como vienen los datos:
+                // Recordemos que estos datos son string, entonces si es
+                //necesario convertimos los datos
+                int id = Integer.parseInt(Datos[0]);
+                int codigo = Integer.parseInt(Datos[1]);
+                String nombre = Datos[2];
+
+
+                //Con nuestros datos, Alumno crear un objeto de tipo Alumno
+
+                Cursos nuevo = new Cursos(id,codigo,nombre);
+                //agregamos este objeto a nuestro arreglo
+                curso[contadorCursos]=nuevo;
+                //EscribirPokemon(pokemons);
+                //y aumentamos a uno nuestro contador de pokemones;
+                contadorCursos++;
+
+            }
+        } catch (Exception e) {
+            System.out.println("Ruta No Encontrada :(");
+            System.out.println(e);
+            System.out.println("ERROR EN LA CARGA DEL ARCHIVO");
+
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                System.out.println(e2);
+                System.out.println("ERROR EN LA CARGA DEL ARCHIVO");
+            }
+
+        }
+    }
+    public static void  mostrarCursos(){
+        System.out.println("Mostrando Todos los Datos Dentro Del Objeto ");
+        for (int i =0;i<contadorCursos;i++){
+            System.out.println("ID : "+curso[i].getId()+" Nombre :"+curso[i].getNombre()+" Código :"
+                    +curso[i].getCodigo());
+        }
+    }
+    public static void CargarNotas () {
+        // ruta en donde stael archivo
+        String ruta;
+        System.out.println("Ingrese la ruta del archivo csv a leer ;");
+
+        ruta = sc.nextLine();
+        // codigo para abrir archivos
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            // OBJETOS PARA ABRIR LOS ARCHIVOS
+            // Una libreria no es mas que una clase que ya esta en JAVA,
+            //entonces cuando importamos "librerias"
+            // Estamos importando una clase
+            archivo = new File(ruta);
+
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+
+            // LEYENDO EL ARCHIVO
+            // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
+            //antes de la lectura
+            String linea = br.readLine();
+            while ((linea = br.readLine()) != null) {
+                // Aqui estamos leyendo fila por fila, entonces vamos a
+                //almacenar esa informacion en nuestro arreglo de Alumnos
+                System.out.println(linea);
+                // Separando los datos por una coma
+                String[] Datos = linea.split(",");
+
+                // Segun la estructura del archivo, sabemos que como vienen los datos:
+                // Recordemos que estos datos son string, entonces si es
+                //necesario convertimos los datos
+                int idalumno = Integer.parseInt(Datos[0]);
+                int idcurso = Integer.parseInt(Datos[1]);
+                double nota = Double.parseDouble(Datos[2]);
+
+
+                //Con nuestros datos, Alumno crear un objeto de tipo Alumno
+
+                Notas nuevo = new Notas(idalumno,idcurso,nota);
+                //agregamos este objeto a nuestro arreglo
+                notas[contadorNotas]=nuevo;
+                //EscribirPokemon(pokemons);
+                //y aumentamos a uno nuestro contador de pokemones;
+                contadorNotas++;
+
+            }
+        } catch (Exception e) {
+            System.out.println("Ruta No Encontrada :(");
+            System.out.println(e);
+            System.out.println("ERROR EN LA CARGA DEL ARCHIVO");
+
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                System.out.println(e2);
+                System.out.println("ERROR EN LA CARGA DEL ARCHIVO");
+            }
+
+        }
+    }
+    public static void  mostrarNotas(){
+        System.out.println("Mostrando Todos los Datos Dentro Del Objeto ");
+        for (int i =0;i<contadorNotas;i++){
+            System.out.println("ID Alumno : "+notas[i].getIdalumno()+" ID Curso :"+notas[i].getIdcurso()+" Nota :"
+                    +notas[i].getNota());
+        }
+    }
+
+    public static void AsiganacionProf () {
+        // ruta en donde stael archivo
+        String ruta;
+        System.out.println("Ingrese la ruta del archivo csv a leer ;");
+
+        ruta = sc.nextLine();
+        // codigo para abrir archivos
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            // OBJETOS PARA ABRIR LOS ARCHIVOS
+            // Una libreria no es mas que una clase que ya esta en JAVA,
+            //entonces cuando importamos "librerias"
+            // Estamos importando una clase
+            archivo = new File(ruta);
+
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+
+            // LEYENDO EL ARCHIVO
+            // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
+            //antes de la lectura
+            String linea = br.readLine();
+            while ((linea = br.readLine()) != null) {
+                // Aqui estamos leyendo fila por fila, entonces vamos a
+                //almacenar esa informacion en nuestro arreglo de Alumnos
+                System.out.println(linea);
+                // Separando los datos por una coma
+                String[] Datos = linea.split(",");
+
+                // Segun la estructura del archivo, sabemos que como vienen los datos:
+                // Recordemos que estos datos son string, entonces si es
+                //necesario convertimos los datos
+                int idProf = Integer.parseInt(Datos[0]);
+                int idCurso = Integer.parseInt(Datos[1]);
+
+
+
+                //Con nuestros datos, Alumno crear un objeto de tipo Alumno
+
+                AsignarProfe nuevo = new AsignarProfe(idProf,idCurso);
+                //agregamos este objeto a nuestro arreglo
+                asignarProfes[asignarprofcont]=nuevo;
+                //EscribirPokemon(pokemons);
+                //y aumentamos a uno nuestro contador de pokemones;
+                asignarprofcont++;
+
+            }
+        } catch (Exception e) {
+            System.out.println("Ruta No Encontrada :(");
+            System.out.println(e);
+            System.out.println("ERROR EN LA CARGA DEL ARCHIVO");
+
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                System.out.println(e2);
+                System.out.println("ERROR EN LA CARGA DEL ARCHIVO");
+            }
+
+        }
+    }
+    public static void  mostrarAsiganicionProf(){
+        System.out.println("Mostrando Todos los Datos Dentro Del Objeto ");
+        for (int i =0;i<asignarprofcont;i++){
+            System.out.println("ID Profesor : "+asignarProfes[i].getIdProf()+" ID Curso :"+asignarProfes[i].getIdCurso());
+        }
+    }
+
 
     // ----------------------------------------------------------------------------
     //REPORTES
@@ -386,6 +621,25 @@ public class main {
         ReporteAlumnos += "<table class=\"steelBlueCols\">";
         ReporteAlumnos += "<h6 class=\"titulos\"><b> Reporte Alumnos</b></h6>\r\n";
         ReportandoAlumnos();
+        try {
+
+            FileWriter archivo = new FileWriter("Reportes/ReporteAlunos.html");
+            archivo.write(ReporteInicio + ReporteAlumnos + ReporteFinal);
+            archivo.close();
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static void CrearReporteCursos() {
+        variableReporte();
+        ReporteAlumnos += "<table class=\"steelBlueCols\">";
+        ReporteAlumnos += "<thead><tr>"
+                + "<th>  " + curso[0].getId() + curso[0].getNombre() + curso[0].getCodigo()+
+                + curso[1].getId() + curso[1].getNombre() + curso[1].getCodigo()+"</th>"
+                + "</tr> "
+                + "</ thead ></table>";
         try {
 
             FileWriter archivo = new FileWriter("Reportes/ReporteAlunos.html");
