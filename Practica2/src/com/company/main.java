@@ -4,7 +4,7 @@ import java.io.*;
 
 import java.util.Scanner;
 
-public class Main {
+public class main {
     static Scanner sc = new Scanner(System.in);
     //Alumonos
     public static Alumno[] alumnos = new Alumno[100];
