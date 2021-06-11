@@ -4,7 +4,7 @@ import java.io.*;
 
 import java.util.Scanner;
 
-public class main {
+public class Main {
     static Scanner sc = new Scanner(System.in);
     //Alumonos
     public static Alumno[] alumnos = new Alumno[100];
@@ -23,20 +23,209 @@ public class main {
     static  int contadorCursos=0;
     static int contadorNotas = 0;
     static int  asignarprofcont = 0;
+    public static usuarios[] u = new usuarios[50];
+    public static int posicion=0;
+
 
 
     public static void main(String[] args) {
-        Menu();
-        CargarCursos();
-        mostrarCursos();
-        CargarNotas();
-        mostrarNotas();
-        AsiganacionProf();
-        mostrarAsiganicionProf();
-        CrearReporteCursos();
+        login();
+
+
+    }
+    public static void login()
+    {
+        if (verif()) {
+            if (posicion==0) {
+                System.out.println();
+                Menu();
+                CargarCursos();
+                mostrarCursos();
+                CargarNotas();
+                mostrarNotas();
+                AsiganacionProf();
+                mostrarAsiganicionProf();
+                CrearReporteCursos();
+            }else
+            {
+                Menu2();
+                mostrarCursos();
+                mostrarNotas();
+                mostrarAsiganicionProf();
+                CrearReporteCursos();
+
+            }
+        }
+        else
+        {
+            System.out.println("Ingreso denegado");
+            System.out.println();
+            login();}
 
     }
 
+    public static boolean verif() {
+
+        boolean b = false;
+        usuarios admin = new usuarios("admin", "admin");
+        u[0] = admin;
+        System.out.println("Ingrese nombre de usuario");
+        String n = sc.nextLine();
+        System.out.println("Ingrese contraseña");
+        String c = sc.nextLine();
+        System.out.println("Igrese de nuevo su contraseña");
+        String co = sc.nextLine();
+        for (int i = 0; i < u.length; i++)
+            try {
+                if (n.equals(u[i].getnombre()) && c.equals(u[i].getcontra()) && co.equals(c)) {
+                    System.out.println("Bienvenido  " + u[0].getnombre());
+                    posicion = i;
+                    b = true;
+                    break;
+                }
+                return b;
+            } catch (Exception e) {
+                return false;
+            }
+        return b;
+    }
+
+
+    // public static int nuevousuario=0;
+    public static void nuevousuario()//CREACION DE UN NUEVO USUARIO, Y VERIFICACION DE QUE NO EXISTA EL NUEVO USUARIO
+    {
+        System.out.println("Ingrese Nuevo Nombre de Usuario");
+        String nn = sc.nextLine().trim();
+        System.out.println("Ingrese contraseña");
+        String nc = sc.nextLine();
+        System.out.println("Vuelva a ingresar la nueva ccontraseña");
+        String nco = sc.nextLine();
+        // try {
+        for (int i = 0; i < u.length; i++)
+
+            if (u[i]!=null&&nn.equals(u[i].getnombre())) {
+                System.out.println("Este nombre ya se encuentra registrado:  " + u[i].getnombre());
+                System.out.println("Ingrese un nuevo nombre de usuario y su respectiva conraseñaa");
+                System.out.println();
+                nuevousuario();
+                break;
+            }
+            else
+            {
+                if (u[i]==null)
+                {
+                    if (nc.equals(nco))
+                    {
+                        usuarios nuevo = new usuarios(nn,nc);
+                        u[i]=nuevo;
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Las contraseñas no coinciden");
+                        nuevousuario();
+                        break;
+                    }
+
+                }
+
+            }
+
+        //  } catch (Exception e) {
+        //   System.out.println("ya no se pueden agregar más usuarios");
+
+
+
+        // }
+
+    }
+    public static void Menu2()
+    {
+        boolean flag = true;
+        do {
+
+
+            //Opciones del Menu
+            System.out.println("---Menu----");
+            System.out.println("Mostrar Alumnos ");
+            System.out.println("2.Cargar Profesores ");
+            System.out.println("3.Cargar Cursos ");
+            System.out.println("4.Asignar alumnos ");
+            System.out.println("5.Asignar profesores ");
+            System.out.println("6.Carga de notas");
+            System.out.println("7.Agregar usuario al sistema:");
+            System.out.println("8.Reportar");
+            System.out.println("9.Manerjo de Errores  ");
+            System.out.println("10.Cerrar sesión");
+            System.out.println("10.Saler");
+            String Op = sc.nextLine();
+            switch (Op) {
+                case "1":
+
+                    System.out.printf("t----------------------");
+                    mostrarAlumons();
+                    System.out.println("-------------------------");
+
+                    break;
+                case "2":
+                    System.out.println("--Cargar Profesores ---");
+
+
+                    break;
+                case "3":
+                    System.out.println("**Cargar Cursos--");
+
+
+                    break;
+                case "4":
+                    System.out.println("--Asignar alumnos-- ");
+
+
+                    break;
+                case "5":
+                    System.out.println("--Asignar profesores--");
+
+
+                    break;
+                case "6":
+                    System.out.println("--Carga de notas--");
+
+
+                    break;
+                case "7":
+                    System.out.println("--Agregar usuarios al sistema --");
+                    nuevousuario();
+
+
+                    break;
+                case "8":
+                    System.out.println("--Reportar--");
+                    Alumno a = new Alumno(12, 326, "Carlos", "lasdf", "M");
+                    alumnos[0] = a;
+                    CrearReporteAlunos();
+
+
+                    break;
+                case "9":
+                    System.out.println("--Manejo de Errores -- ");
+                    break;
+
+                case "10":
+                    login();
+                    break;
+
+                case "11":
+                    flag = false;
+                    break;
+
+                default:
+                    System.out.println("ERROR: OPCION INVALIDA ");
+                    System.out.println();
+                    break;
+            }
+
+        } while (flag);
+    }
     //Menu  Principal --
     public static void Menu() {
         boolean flag = true;
@@ -54,7 +243,8 @@ public class main {
             System.out.println("7.Agregar usuario al sistema:");
             System.out.println("8.Reportar");
             System.out.println("9.Manerjo de Errores  ");
-            System.out.println("10.Saler");
+            System.out.println("10.Cerrar Sesion");
+            System.out.println("11.Salir");
             String Op = sc.nextLine();
             switch (Op) {
                 case "1":
@@ -92,6 +282,7 @@ public class main {
                     break;
                 case "7":
                     System.out.println("--Agregar usuarios al sistema --");
+                    nuevousuario();
 
 
                     break;
@@ -108,6 +299,11 @@ public class main {
                     break;
 
                 case "10":
+                    login();
+                    break;
+
+
+                case "11":
                     flag = false;
                     break;
 
