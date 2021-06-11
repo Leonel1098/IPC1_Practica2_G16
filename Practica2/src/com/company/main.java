@@ -287,7 +287,7 @@ public class main {
                     System.out.println("--Reportar--");
 
                     CrearReporteAlunos();
-
+                    CrearReporteGeneralCursoss();
 
                     break;
                 case "9":
@@ -1002,6 +1002,83 @@ public class main {
         }
 
         return "";
+    }
+
+
+    //----------------
+    //Reporte General de Curso
+    static String VReporteGEneralCursos = "";
+
+    public static void CrearReporteGeneralCursoss() {
+        variableReporte();
+
+        VReporteGEneralCursos += "<table class=\"steelBlueCols\">";
+        VReporteGEneralCursos += "<thead><tr>"
+                + "<th>  " + "REPORTE General de Cursos" + "</th>"
+                + "<th>  " + new Date().toString() + "</th>"
+                + "</tr> "
+                + "</ thead ></table>";
+        ReportaandoReporteGeneralCuros();
+        try {
+
+            FileWriter archivo = new FileWriter("ReporteGeneralCursos.html");
+            archivo.write(ReporteInicio + VReporteGEneralCursos + ReporteFinal);
+            archivo.close();
+
+        } catch (Exception e) {
+
+        }
+    }
+
+
+
+    public static void ReportaandoReporteGeneralCuros(){
+        for (int i =0 ; i<contadorCursos;i++){
+
+
+            VReporteGEneralCursos += "<!----tabla 2-->\n" +
+                    "<table class=\"steelBlueCols\">\n" +
+                    "<thead>\n" +
+                    "   <tr> <th>Codigo </th> " +
+                    "<th>Nombre </th> " +
+                    "<th>Cantidad de Alumnos </th>" +
+
+                    "</thead>\n" +
+                    "<tbody>\n" +
+                    "   <tr> <td>" +curso[i].getNombre() + "</td>" +
+                    " <td>" + curso[i].getCodigo() + " </td> " +
+                    " <td>" + contadorAlumnosEnCursos(curso[i].getId()) + " </td> " +
+
+
+
+                    "</tbody>\n" +
+                    "</table>\n" +
+                    " <!----termina tabla 2-->";
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+    }
+
+    public static int contadorAlumnosEnCursos(int idCurso){
+        int NoAlunmons=0;;
+        for (int i =0 ; i<contadorAsignacionAlunos;i++){
+            if(idCurso==AsignacionesAlumnos[i].getIdCurso()){
+                NoAlunmons++;
+            }
+        }
+
+
+        return NoAlunmons;
     }
 
 }
