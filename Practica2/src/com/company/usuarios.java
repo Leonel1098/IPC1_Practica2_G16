@@ -1,8 +1,9 @@
 package com.company;
 
 public class usuarios {
-    private String nombre,contra;
-    public usuarios(String nombre, String contra)
+    private String nombre;
+    private char[] contra;
+    public usuarios(String nombre, char[] contra)
     {
         this.nombre=nombre;
         this.contra=contra;
@@ -11,7 +12,7 @@ public class usuarios {
     {
         return nombre;
     }
-    public String getcontra()
+    public char[] getcontra()
     {
         return contra;
     }

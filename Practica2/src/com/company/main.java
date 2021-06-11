@@ -1,13 +1,13 @@
 package com.company;
 
 import javax.xml.crypto.Data;
-import java.io.*;
+import java.io. *;
 
 import java.util.Date;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class main {
+public class Main {
     static Scanner sc = new Scanner(System.in);
     //Alumonos
     public static Alumno[] alumnos = new Alumno[100];
@@ -26,7 +26,7 @@ public class main {
     static int contadorCursos ;
     static int contadorNotas ;
     static int asignarprofcont = 0;
-    public static usuarios[] u = new usuarios[50];
+    public static usuarios[] u = new usuarios[6];
     public static int posicion = 0;
 
 
@@ -39,8 +39,8 @@ public class main {
 
     public static void login() {
         if (verif()) {
-            if (posicion == 0) {
-                System.out.println();
+            if (posicion==0) {
+                System.out.println("Menu de admin");
                 Menu();
                 CargarCursos();
                 mostrarCursos();
@@ -48,37 +48,44 @@ public class main {
                 mostrarNotas();
                 AsiganacionProf();
                 mostrarAsiganicionProf();
-
-            } else {
+                // CrearReporteCursos();
+            }else
+            {
+                System.out.println("Menu de usuario");
                 Menu2();
                 mostrarCursos();
                 mostrarNotas();
                 mostrarAsiganicionProf();
-
+                // CrearReporteCursos();
 
             }
-        } else {
+        }
+        else
+        {
             System.out.println("Ingreso denegado");
             System.out.println();
-            login();
-        }
-
+            login();}
     }
 
     public static boolean verif() {
 
         boolean b = false;
-        usuarios admin = new usuarios("admin", "admin");
+        char[] k = new char[]{'a','d','m','i','n'};
+        System.out.println(k);
+        usuarios admin = new usuarios("admin", k);
         u[0] = admin;
         System.out.println("Ingrese nombre de usuario");
         String n = sc.nextLine();
         System.out.println("Ingrese contraseña");
-        String c = sc.nextLine();
+        Console bbcita = System.console();
+        char[] contra= bbcita.readPassword();
         System.out.println("Igrese de nuevo su contraseña");
-        String co = sc.nextLine();
+        Console bblin = System.console();
+        char[] contra2= bblin.readPassword();
+
         for (int i = 0; i < u.length; i++)
             try {
-                if (u[i] != null && n.equals(u[i].getnombre()) && c.equals(u[i].getcontra()) && co.equals(c)) {
+                if (u[i]!=null&&n.equals(u[i].getnombre()) &&java.util.Arrays.equals(u[i].getcontra(),contra) && java.util.Arrays.equals(contra2,contra)) {
                     System.out.println("Bienvenido  " + u[i].getnombre());
                     posicion = i;
                     b = true;
@@ -86,6 +93,7 @@ public class main {
                 }
 
             } catch (Exception e) {
+                System.out.println("dio error");
                 return false;
             }
         return b;
@@ -98,39 +106,51 @@ public class main {
         System.out.println("Ingrese Nuevo Nombre de Usuario");
         String nn = sc.nextLine().trim();
         System.out.println("Ingrese contraseña");
-        String nc = sc.nextLine();
-        System.out.println("Vuelva a ingresar la nueva ccontraseña");
-        String nco = sc.nextLine();
-        // try {
-        for (int i = 0; i < u.length; i++)
+        Console bbcita = System.console();
+        char[] contra = bbcita.readPassword();
 
-            if (u[i] != null && nn.equals(u[i].getnombre())) {
-                System.out.println("Este nombre ya se encuentra registrado:  " + u[i].getnombre());
-                System.out.println("Ingrese un nuevo nombre de usuario y su respectiva conraseñaa");
-                System.out.println();
-                nuevousuario();
-                break;
-            } else {
-                if (u[i] == null) {
-                    if (nc.equals(nco)) {
-                        usuarios nuevo = new usuarios(nn, nc);
-                        u[i] = nuevo;
-                        break;
-                    } else {
-                        System.out.println("Las contraseñas no coinciden");
-                        nuevousuario();
-                        break;
+        System.out.println("Vuelva a ingresar la nueva ccontraseña");
+        Console bblin = System.console();
+        char[]  contra2 = bblin.readPassword();
+
+        try {
+            for (int i = 0; i < u.length; i++)
+
+                if (u[i]!=null&&nn.equals(u[i].getnombre())) {
+                    System.out.println("Este nombre ya se encuentra registrado:  " + u[i].getnombre());
+                    System.out.println("Ingrese un nuevo nombre de usuario y su respectiva conraseñaa");
+                    System.out.println();
+                    nuevousuario();
+                    break;
+                }
+                else
+                {
+                    if (u[i]==null)
+                    {
+                        if (java.util.Arrays.equals(contra2,contra))
+                        {
+                            usuarios nuevo = new usuarios(nn,contra);
+                            u[i]=nuevo;
+                            break;
+                        }
+                        else
+                        {
+                            System.out.println("Las contraseñas no coinciden");
+                            nuevousuario();
+                            break;
+                        }
+
                     }
 
                 }
 
-            }
-
-        //  } catch (Exception e) {
-        //   System.out.println("ya no se pueden agregar más usuarios");
+        } catch (Exception e) {
+            System.out.println("ya no se pueden agregar más usuarios");
 
 
-        // }
+
+        }
+
 
     }
 
