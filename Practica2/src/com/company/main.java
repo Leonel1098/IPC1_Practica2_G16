@@ -4,7 +4,7 @@ import java.io.*;
 
 import java.util.Scanner;
 
-public class Main {
+public class main {
     static Scanner sc = new Scanner(System.in);
     //Alumonos
     public static Alumno[] alumnos = new Alumno[100];
@@ -170,17 +170,17 @@ public class Main {
                 case "2":
                     System.out.println("--Cargar Profesores ---");
 
-
+                    CargarProfesores();
                     break;
                 case "3":
                     System.out.println("**Cargar Cursos--");
-
+                    CargarCursos();
 
                     break;
                 case "4":
                     System.out.println("--Asignar alumnos-- ");
 
-
+                    asignarAlumno();
                     break;
                 case "5":
                     System.out.println("--Asignar profesores--");
@@ -257,18 +257,18 @@ public class Main {
                     break;
                 case "2":
                     System.out.println("--Cargar Profesores ---");
-
+                    CargarProfesores();
 
                     break;
                 case "3":
                     System.out.println("**Cargar Cursos--");
-
+                    CargarCursos();
 
                     break;
                 case "4":
                     System.out.println("--Asignar alumnos-- ");
 
-
+                    asignarAlumno();
                     break;
                 case "5":
                     System.out.println("--Asignar profesores--");
@@ -288,8 +288,7 @@ public class Main {
                     break;
                 case "8":
                     System.out.println("--Reportar--");
-                    Alumno a = new Alumno(12, 326, "Carlos", "lasdf", "M");
-                    alumnos[0] = a;
+
                     CrearReporteAlunos();
 
 
@@ -784,7 +783,7 @@ public class Main {
                 + "\r\n"
                 + "\r\n"
                 + "<link href=\"style.css\" rel=\"stylesheet\">"
-                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\"/><!--css /estilo/tipo/ruta relativa -->\r\n"
+                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"Reportes/css/styles.css\"/><!--css /estilo/tipo/ruta relativa -->\r\n"
                 + "\r\n"
                 + "<title>Reporte</title><!--Titulo visible de la pagina-->\r\n"
                 + "</head>\r\n"
@@ -815,11 +814,11 @@ public class Main {
     public static void CrearReporteAlunos() {
         variableReporte();
         ReporteAlumnos += "<table class=\"steelBlueCols\">";
-        ReporteAlumnos += "<h6 class=\"titulos\"><b> Reporte Alumnos</b></h6>\r\n";
+        ReporteAlumnos += "<h6 class=\"titulos\"><b> Reportes/Reporte Alumnos</b></h6>\r\n";
         ReportandoAlumnos();
         try {
 
-            FileWriter archivo = new FileWriter("Reportes/ReporteAlunos.html");
+            FileWriter archivo = new FileWriter("ReporteAlunos.html");
             archivo.write(ReporteInicio + ReporteAlumnos + ReporteFinal);
             archivo.close();
 
@@ -857,6 +856,12 @@ public class Main {
             if (alumnos[i].getGenero().equals("F")) {
                 Genero = "Femenino";
             }
+            String Fecha = alumnos[i].getFnac();
+            System.out.println(alumnos[i].getFnac());
+            String Datos [] =Fecha.split("/");
+            int edad = Integer.parseInt(Datos[2]);
+            edad =2021-edad;
+
 
             ReporteAlumnos+="<!----tabla 2-->\n" +
                     "<table class=\"steelBlueCols\">\n" +
@@ -869,7 +874,7 @@ public class Main {
                     "<tbody>\n" +
                     "   <tr> <td>"+alumnos[i].getCarne()+ "</td>" +
                     " <td>"+alumnos[i].getNombre()+" </td> " +
-                    "<td>"+alumnos[i].getFnac()+"</td> " +
+                    "<td>"+edad+"</td> " +
                     "<td>"+Genero+"</td></tr>"+
 
                     "</tbody>\n" +
