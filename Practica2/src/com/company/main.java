@@ -48,13 +48,13 @@ public class main {
                 mostrarNotas();
                 AsiganacionProf();
                 mostrarAsiganicionProf();
-                CrearReporteCursos();
+
             } else {
                 Menu2();
                 mostrarCursos();
                 mostrarNotas();
                 mostrarAsiganicionProf();
-                CrearReporteCursos();
+
 
             }
         } else {
@@ -178,7 +178,7 @@ public class main {
                     break;
                 case "5":
                     System.out.println("--Asignar profesores--");
-
+                    AsiganacionProf();
 
                     break;
                 case "6":
@@ -269,8 +269,9 @@ public class main {
                     break;
                 case "5":
                     System.out.println("--Asignar profesores--");
-
-
+                    AsiganacionProf();
+                    ReportandoAsinacionProfesores();
+                    CrearReporteAsignacionProfesores();
                     break;
                 case "6":
                     System.out.println("--Carga de notas--");
@@ -827,24 +828,7 @@ public class main {
         }
     }
 
-    public static void CrearReporteCursos() {
-        variableReporte();
-        ReporteAlumnos += "<table class=\"steelBlueCols\">";
-        ReporteAlumnos += "<thead><tr>"
-                + "<th>  " + curso[0].getId() + curso[0].getNombre() + curso[0].getCodigo() +
-                +curso[1].getId() + curso[1].getNombre() + curso[1].getCodigo() + "</th>"
-                + "</tr> "
-                + "</ thead ></table>";
-        try {
 
-            FileWriter archivo = new FileWriter("Reportes/ReporteAlunos.html");
-            archivo.write(ReporteInicio + ReporteAlumnos + ReporteFinal);
-            archivo.close();
-
-        } catch (Exception e) {
-
-        }
-    }
 
     public static void ReportandoAlumnos() {
 
@@ -890,13 +874,14 @@ public class main {
 
     //Reportando Asignacion de Alumnos
     static String VReporteAsignacionAlumnos = "";
+    static String VReporteAsignacionProfesores = "";
 
     public static void CrearReporteAsignacionAlumnos() {
         variableReporte();
 
         VReporteAsignacionAlumnos += "<table class=\"steelBlueCols\">";
         VReporteAsignacionAlumnos += "<thead><tr>"
-                + "<th>  " + "REPORTE ASIDGNACION DE ALUMNS" + "</th>"
+                + "<th>  " + "REPORTE ASIDGNACION DE ALUMNoS" + "</th>"
                 + "<th>  " + new Date().toString() + "</th>"
                 + "</tr> "
                 + "</ thead ></table>";
@@ -935,17 +920,55 @@ public class main {
                     " <!----termina tabla 2-->";
 
 
-
-
-
-
-
-
         }
 
 
     }
+    public static void CrearReporteAsignacionProfesores() {
+        variableReporte();
 
+        VReporteAsignacionProfesores += "<table class=\"steelBlueCols\">";
+        VReporteAsignacionProfesores += "<thead><tr>"
+                + "<th>  " + "REPORTE ASIGNACION DE PROFESORES" + "</th>"
+                + "<th>  " + new Date().toString() + "</th>"
+                + "</tr> "
+                + "</ thead ></table>";
+        try {
+
+            FileWriter archivo = new FileWriter("ReporteAsignacionProfesores.html");
+            archivo.write(ReporteInicio + VReporteAsignacionProfesores + ReporteFinal);
+            archivo.close();
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static void ReportandoAsinacionProfesores() {
+
+        for (int i = 0; i < asignarprofcont; i++) {
+
+            VReporteAsignacionProfesores += "<!----tabla 2-->\n" +
+                    "<table class=\"steelBlueCols\">\n" +
+                    "<thead>\n" +
+                    "   <tr> <th>Registro Personal</th> " +
+                    "<th>Nombre Profesor </th> " +
+                    "<th>Codigo de Curso </th>" +
+                    "<th>Nombre de Curso </th> </tr>" +
+                    "</thead>\n" +
+                    "<tbody>\n" +
+                    "   <tr> <td>" +BuscarRegistroPersonal(asignarProfes[i].getIdProf() ) + "</td>" +
+                    " <td>" + BuscarNombreProfesor(asignarProfes[i].getIdProf()) + " </td> " +
+                    " <td>" + BuscarCodigodeCurso(asignarProfes[i].getIdCurso())+ " </td> " +
+                    " <td>" + BuscarNombreCurso(asignarProfes[i].getIdCurso())  + " </td> " +
+
+
+                    "</tbody>\n" +
+                    "</table>\n" +
+                    " <!----termina tabla 2-->";
+        }
+
+    }
     //-------------------------------------------------------------------------
     public static String BuscarNombreAlumnos(int id) {
         for (int i = 0; i < contadorAlumnos; i++) {
@@ -1004,6 +1027,17 @@ public class main {
         return "";
     }
 
+    public static int BuscarRegistroPersonal(int id){
+        for (int i =0 ; i<contadorProfe;i++){
+            if (id == profesores[i].getId()){
+                System.out.println(profesores[i].getRegistroPersonal());
+                return profesores[i].getRegistroPersonal();
+            }
+
+        }
+
+        return 0;
+    }
 
     //----------------
     //Reporte General de Curso
