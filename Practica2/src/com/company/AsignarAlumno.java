@@ -3,11 +3,11 @@ package com.company;
 public class AsignarAlumno {
 
     private int idAlumno;
-    private int idProfesor;
+    private int idCurso;
 
-    public AsignarAlumno(int alumno,int idProfesor){
+    public AsignarAlumno(int alumno,int idCurso){
         this.idAlumno=alumno;
-        this.idProfesor=idProfesor;
+        this.idCurso=idCurso;
     }
 
     public int getIdAlumno() {
@@ -18,11 +18,11 @@ public class AsignarAlumno {
         this.idAlumno = idAlumno;
     }
 
-    public int getIdProfesor() {
-        return idProfesor;
+    public int getIdCurso() {
+        return idCurso;
     }
 
-    public void setIdProfesor(int idProfesor) {
-        this.idProfesor = idProfesor;
+    public void setIdCurso(int idProfesor) {
+        this.idCurso = idProfesor;
     }
 }
