@@ -77,13 +77,13 @@ public class Main {
         String co = sc.nextLine();
         for (int i = 0; i < u.length; i++)
             try {
-                if (n.equals(u[i].getnombre()) && c.equals(u[i].getcontra()) && co.equals(c)) {
-                    System.out.println("Bienvenido  " + u[0].getnombre());
+                if (u[i]!=null&&n.equals(u[i].getnombre()) && c.equals(u[i].getcontra()) && co.equals(c)) {
+                    System.out.println("Bienvenido  " + u[i].getnombre());
                     posicion = i;
                     b = true;
-                    break;
+                    return b;
                 }
-                return b;
+
             } catch (Exception e) {
                 return false;
             }
