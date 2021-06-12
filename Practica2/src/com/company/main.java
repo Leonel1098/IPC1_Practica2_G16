@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Main {
+public class main {
     static Scanner sc = new Scanner(System.in);
     //Alumonos
     public static Alumno[] alumnos = new Alumno[100];
@@ -32,7 +32,7 @@ public class Main {
 
     //MAIN
     public static void main(String[] args) {
-        login();
+        Menu();
 
 
     }
@@ -359,6 +359,7 @@ public class Main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
+                int contLineas=1;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -368,21 +369,35 @@ public class Main {
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
                 //necesario convertimos los datos
-                int id = Integer.parseInt(Datos[0]);
-                int Carne = Integer.parseInt(Datos[1]);
-                String nombre = Datos[2];
-                String Fnac = Datos[3];
-                String Genero = Datos[4];
+                try {
+                    contLineas++;
+                    int id = Integer.parseInt(Datos[0]);
+                    int Carne = Integer.parseInt(Datos[1]);
+                    String nombre = Datos[2];
+                    String Fnac = Datos[3];
+                    String Genero = Datos[4];
 
-                //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
+                    //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
 
-                Alumno nuevo = new Alumno(id, Carne, nombre, Fnac, Genero);
-                //agregamos este objeto a nuestro arreglo
-                alumnos[contadorAlumnos] = nuevo;
-                //EscribirPokemon(pokemons);
-                //y aumentamos a uno nuestro contador de pokemones;
-                contadorAlumnos++;
+                    Alumno nuevo = new Alumno(id, Carne, nombre, Fnac, Genero);
+                    //agregamos este objeto a nuestro arreglo
+                    alumnos[contadorAlumnos] = nuevo;
+                    //EscribirPokemon(pokemons);
+                    //y aumentamos a uno nuestro contador de pokemones;
+                    contadorAlumnos++;
+                }catch (Exception e) {
+                    System.out.println(e.toString());
+                    String error = e.getMessage();
+                    String erro2 = e.getLocalizedMessage();
+                    System.out.println(erro2);
+                    String DErr[] = error.split(":");
+                    if (DErr[0].equals("For input string")) {
+                        System.out.println("Error en la Linea " + contLineas);
+                        System.out.println(DErr[1] + " No es un Numero ");
 
+                    }
+
+                }
 
             }
         } catch (Exception e) {
@@ -430,6 +445,7 @@ public class Main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
+                int contLineas=1;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Profesores
                 System.out.println(linea);
@@ -439,21 +455,36 @@ public class Main {
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
                 //necesario convertimos los datos
-                int id = Integer.parseInt(Datos[0]);
-                int Registro_de_Personal = Integer.parseInt(Datos[1]);
-                String nombre = Datos[2];
-                String Fnac = Datos[3];
-                String FContrato = Datos[4];
-                String Genero = Datos[5];
+                try {
+                    contLineas++;
+                    int id = Integer.parseInt(Datos[0]);
+                    int Registro_de_Personal = Integer.parseInt(Datos[1]);
+                    String nombre = Datos[2];
+                    String Fnac = Datos[3];
+                    String FContrato = Datos[4];
+                    String Genero = Datos[5];
 
-                //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
+                    //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
 
-                Profesor nuevo = new Profesor(id, Registro_de_Personal, nombre, Fnac, FContrato, Genero);
-                //agregamos este objeto a nuestro arreglo
-                profesores[contadorProfe] = nuevo;
-                //EscribirPokemon(pokemons);
-                //y aumentamos a uno nuestro contador de pokemones;
-                contadorProfe++;
+                    Profesor nuevo = new Profesor(id, Registro_de_Personal, nombre, Fnac, FContrato, Genero);
+                    //agregamos este objeto a nuestro arreglo
+                    profesores[contadorProfe] = nuevo;
+                    //EscribirPokemon(pokemons);
+                    //y aumentamos a uno nuestro contador de pokemones;
+                    contadorProfe++;
+                }catch (Exception e){
+                    System.out.println(e.toString());
+                    String error=e.getMessage();
+                    String erro2=e.getLocalizedMessage();
+                    System.out.println(erro2);
+                    String DErr[]=error.split(":");
+                    if (DErr[0].equals("For input string")){
+                        System.out.println("Error en la Linea "+ contLineas);
+                        System.out.println(DErr[1]+" No es un Numero ");
+                    }
+
+                }
+
 
 
             }
@@ -510,6 +541,7 @@ public class Main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
+                int contLineas=2;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -519,18 +551,32 @@ public class Main {
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
                 //necesario convertimos los datos
-                int idAlumon = Integer.parseInt(Datos[0]);
-                int idProfesor = Integer.parseInt(Datos[1]);
+                try {
+                    contLineas++;
+                    int idAlumon = Integer.parseInt(Datos[0]);
+                    int idProfesor = Integer.parseInt(Datos[1]);
 
 
-                //Con nuestros datos, com.company.AsignarAlumno crear un objeto de tipo com.company.AsignarAlumno
+                    //Con nuestros datos, com.company.AsignarAlumno crear un objeto de tipo com.company.AsignarAlumno
 
-                AsignarAlumno nuevo = new AsignarAlumno(idAlumon, idProfesor);
-                //agregamos este objeto a nuestro arreglo
-                AsignacionesAlumnos[contadorAsignacionAlunos] = nuevo;
-                //EscribirPokemon(pokemons);
-                //y aumentamos a uno nuestro contador de pokemones;
-                contadorAsignacionAlunos++;
+                    AsignarAlumno nuevo = new AsignarAlumno(idAlumon, idProfesor);
+                    //agregamos este objeto a nuestro arreglo
+                    AsignacionesAlumnos[contadorAsignacionAlunos] = nuevo;
+                    //EscribirPokemon(pokemons);
+                    //y aumentamos a uno nuestro contador de pokemones;
+                    contadorAsignacionAlunos++;
+                }catch (Exception e){
+                    System.out.println(e.toString());
+                    String error=e.getMessage();
+                    String erro2=e.getLocalizedMessage();
+                    System.out.println(erro2);
+                    String DErr[]=error.split(":");
+                    if (DErr[0].equals("For input string")){
+                        System.out.println("Error en la Linea "+ contLineas);
+                        System.out.println(DErr[1]+" No es un Numero ");
+                    }
+                }
+
 
 
             }
@@ -580,6 +626,7 @@ public class Main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
+                int contLineas=0;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -589,19 +636,33 @@ public class Main {
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
                 //necesario convertimos los datos
-                int id = Integer.parseInt(Datos[0]);
-                int codigo = Integer.parseInt(Datos[1]);
-                String nombre = Datos[2];
+                try {
+                    contLineas++;
+                    int id = Integer.parseInt(Datos[0]);
+                    int codigo = Integer.parseInt(Datos[1]);
+                    String nombre = Datos[2];
 
 
-                //Con nuestros datos, Alumno crear un objeto de tipo Alumno
+                    //Con nuestros datos, Alumno crear un objeto de tipo Alumno
 
-                Cursos nuevo = new Cursos(id, codigo, nombre);
-                //agregamos este objeto a nuestro arreglo
-                curso[contadorCursos] = nuevo;
-                //EscribirPokemon(pokemons);
-                //y aumentamos a uno nuestro contador de pokemones;
-                contadorCursos++;
+                    Cursos nuevo = new Cursos(id, codigo, nombre);
+                    //agregamos este objeto a nuestro arreglo
+                    curso[contadorCursos] = nuevo;
+                    //EscribirPokemon(pokemons);
+                    //y aumentamos a uno nuestro contador de pokemones;
+                    contadorCursos++;
+                }catch (Exception e){
+                    System.out.println(e.toString());
+                    String error=e.getMessage();
+                    String erro2=e.getLocalizedMessage();
+                    System.out.println(erro2);
+                    String DErr[]=error.split(":");
+                    if (DErr[0].equals("For input string")){
+                        System.out.println("Error en la Linea "+ contLineas);
+                        System.out.println(DErr[1]+" No es un Numero ");
+                    }
+                }
+
 
             }
         } catch (Exception e) {
@@ -656,6 +717,7 @@ public class Main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
+                int contLineas=0;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -665,19 +727,33 @@ public class Main {
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
                 //necesario convertimos los datos
-                int idalumno = Integer.parseInt(Datos[0]);
-                int idcurso = Integer.parseInt(Datos[1]);
-                double nota = Double.parseDouble(Datos[2]);
+                try {
+                    contLineas++;
+                    int idalumno = Integer.parseInt(Datos[0]);
+                    int idcurso = Integer.parseInt(Datos[1]);
+                    double nota = Double.parseDouble(Datos[2]);
 
 
-                //Con nuestros datos, Alumno crear un objeto de tipo Alumno
+                    //Con nuestros datos, Alumno crear un objeto de tipo Alumno
 
-                Notas nuevo = new Notas(idalumno, idcurso, nota);
-                //agregamos este objeto a nuestro arreglo
-                notas[contadorNotas] = nuevo;
-                //EscribirPokemon(pokemons);
-                //y aumentamos a uno nuestro contador de pokemones;
-                contadorNotas++;
+                    Notas nuevo = new Notas(idalumno, idcurso, nota);
+                    //agregamos este objeto a nuestro arreglo
+                    notas[contadorNotas] = nuevo;
+                    //EscribirPokemon(pokemons);
+                    //y aumentamos a uno nuestro contador de pokemones;
+                    contadorNotas++;
+                }catch (Exception e){
+                    System.out.println(e.toString());
+                    String error=e.getMessage();
+                    String erro2=e.getLocalizedMessage();
+                    System.out.println(erro2);
+                    String DErr[]=error.split(":");
+                    if (DErr[0].equals("For input string")){
+                        System.out.println("Error en la Linea "+ contLineas);
+                        System.out.println(DErr[1]+" No es un Numero ");
+                    }
+                }
+
 
             }
         } catch (Exception e) {
@@ -732,6 +808,7 @@ public class Main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
+                int contLineas=1;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -741,18 +818,33 @@ public class Main {
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
                 //necesario convertimos los datos
-                int idProf = Integer.parseInt(Datos[0]);
-                int idCurso = Integer.parseInt(Datos[1]);
+                try {
+                    contLineas++;
+                    int idProf = Integer.parseInt(Datos[0]);
+                    int idCurso = Integer.parseInt(Datos[1]);
 
 
-                //Con nuestros datos, Alumno crear un objeto de tipo Alumno
+                    //Con nuestros datos, Alumno crear un objeto de tipo Alumno
 
-                AsignarProfe nuevo = new AsignarProfe(idProf, idCurso);
-                //agregamos este objeto a nuestro arreglo
-                asignarProfes[asignarprofcont] = nuevo;
-                //EscribirPokemon(pokemons);
-                //y aumentamos a uno nuestro contador de pokemones;
-                asignarprofcont++;
+                    AsignarProfe nuevo = new AsignarProfe(idProf, idCurso);
+                    //agregamos este objeto a nuestro arreglo
+                    asignarProfes[asignarprofcont] = nuevo;
+                    //EscribirPokemon(pokemons);
+                    //y aumentamos a uno nuestro contador de pokemones;
+                    asignarprofcont++;
+                }catch (Exception e){
+                    System.out.println(e.toString());
+                    String error=e.getMessage();
+                    String erro2=e.getLocalizedMessage();
+                    System.out.println(erro2);
+                    String DErr[]=error.split(":");
+                    if (DErr[0].equals("For input string")){
+                        System.out.println("Error en la Linea "+ contLineas);
+                        System.out.println(DErr[1]+" No es un Numero ");
+                    }
+
+                }
+
 
             }
         } catch (Exception e) {
@@ -832,8 +924,11 @@ public class Main {
 
     public static void CrearReporteAlunos() {
         variableReporte();
-        ReporteAlumnos += "<table class=\"steelBlueCols\">";
-        ReporteAlumnos += "<h6 class=\"titulos\"><b> Reportes/Reporte Alumnos</b></h6>\r\n";
+        ReporteAlumnos += "<thead><tr>"
+                + "<th>  " + "REPORTE ALUMNOS" + "</th>"
+                + "<th>  " + new Date().toString() + "</th>"
+                + "</tr> "
+                + "</ thead ></table>";
         ReportandoAlumnos();
         try {
 
