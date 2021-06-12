@@ -25,7 +25,7 @@ public class main {
     //Contadores
     static int contadorCursos ;
     static int contadorNotas ;
-    static int asignarprofcont = 0;
+    static int asignarprofcont ;
     public static usuarios[] u = new usuarios[6];
     public static int posicion = 0;
 
@@ -1227,5 +1227,70 @@ public class main {
 
         return NoAlunmons;
     }
+    //Reporet Cursos espesificos 
+    public static void ReporteCursoEspecifico(){
+        //Emcabezado ------
+        System.out.println("ingrese Codigo Curso");
+        int CodigoCurso=sc.nextInt();
+        String NombreCurso=BuscarNombreCurso(CodigoCurso);
+        int idCurso=BuscarIdCurso(CodigoCurso);
+        int idPrfe=BuscarIdProfe(idCurso);
+        String NombreProfe = BuscarNombreProfesor(idPrfe);
+        int RPersonalProf=BuscarRegistroPersonal(idPrfe);
+        int []alumnos=AlumnosEnCurso(idCurso);
+        int []carnets;
 
+
+    }
+    public static int BuscarIdCurso(int CodigoCurso){
+        for (int i=0; i<contadorCursos;i++){
+            if(CodigoCurso==curso[i].getCodigo()){
+                return curso[i].getId();
+            }
+        }
+        return 0;
+    }
+
+
+    public static int BuscarIdProfe(int idCurso){
+        for (int i =0 ; i<asignarprofcont;i++){
+            if (idCurso == asignarProfes[i].getIdCurso()){
+                return asignarProfes[i].getIdProf();
+            }
+        }
+        return 0;
+
+    }
+    public static int []AlumnosEnCurso(int idCurso){
+        int Alumnos[]=null;
+        for (int i =0 ; i< contadorAsignacionAlunos;i++){
+            if (idCurso==AsignacionesAlumnos[i].getIdCurso()){
+                Alumnos[i]=AsignacionesAlumnos[i].getIdAlumno();
+            }
+        }
+        return Alumnos;
+    }
+    //Repeporte de Cuerpo de Reporte Espesifico
+    public static void CueropoReporteCursoEspesifico(int idAlumno){
+
+        for (int i=0;i<contadorAlumnos;i++){
+            if (idAlumno==alumnos[i].getId()){
+               int Carne=alumnos[i].getCarne();
+               String Nombre =alumnos[i].getNombre();
+               double nota=BuscarNota(idAlumno);
+
+
+            }
+        }
+
+    }
+    public static double BuscarNota(int idAlumno){
+        for (int i =0 ;i<contadorNotas;i++){
+            if (idAlumno==notas[i].getIdalumno()){
+
+                return notas[i].getNota();
+            }
+        }
+        return 0;
+    }
 }
