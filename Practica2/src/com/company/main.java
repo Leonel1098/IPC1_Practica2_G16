@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Main {
+public class main {
     static Scanner sc = new Scanner(System.in);
     //Alumonos
     public static Alumno[] alumnos = new Alumno[100];
@@ -56,7 +56,7 @@ public class Main {
                 mostrarCursos();
                 mostrarNotas();
                 mostrarAsiganicionProf();
-                // CrearReporteCursos();
+                //CrearReporteCursos();
 
             }
         }
