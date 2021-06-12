@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class main {
+public class Main {
     static Scanner sc = new Scanner(System.in);
     //Alumonos
     public static Alumno[] alumnos = new Alumno[100];
@@ -42,21 +42,21 @@ public class main {
             if (posicion==0) {
                 System.out.println("Menu de admin");
                 Menu();
-                CargarCursos();
+               /* CargarCursos();
                 mostrarCursos();
                 CargarNotas();
                 mostrarNotas();
                 AsiganacionProf();
-                mostrarAsiganicionProf();
+                mostrarAsiganicionProf();*/
                 // CrearReporteCursos();
             }else
             {
                 System.out.println("Menu de usuario");
                 Menu2();
-                mostrarCursos();
+               /* mostrarCursos();
                 mostrarNotas();
-                mostrarAsiganicionProf();
-                //CrearReporteCursos();
+                mostrarAsiganicionProf();*/
+                // CrearReporteCursos();
 
             }
         }
@@ -157,80 +157,26 @@ public class main {
     public static void Menu2() {
         boolean flag = true;
         do {
-
-
             //Opciones del Menu
-            System.out.println("---Menu----");
-            System.out.println("Mostrar Alumnos ");
-            System.out.println("2.Cargar Profesores ");
-            System.out.println("3.Cargar Cursos ");
-            System.out.println("4.Asignar alumnos ");
-            System.out.println("5.Asignar profesores ");
-            System.out.println("6.Carga de notas");
-            System.out.println("7.Agregar usuario al sistema:");
-            System.out.println("8.Reportar");
-            System.out.println("9.Manerjo de Errores  ");
-            System.out.println("10.Cerrar sesión");
-            System.out.println("10.Saler");
+            System.out.println("1.Reportar");
+            System.out.println("2.Cerrar Sesión");
+            System.out.println("3.Salir");
             String Op = sc.nextLine();
             switch (Op) {
                 case "1":
 
-                    System.out.printf("t----------------------");
-                    mostrarAlumons();
-                    System.out.println("-------------------------");
+
+                    submenu();
+
 
                     break;
                 case "2":
-                    System.out.println("--Cargar Profesores ---");
+                    login();
 
-                    CargarProfesores();
                     break;
                 case "3":
-                    System.out.println("**Cargar Cursos--");
-                    CargarCursos();
+                    System.exit(12);break;
 
-                    break;
-                case "4":
-                    System.out.println("--Asignar alumnos-- ");
-
-                    asignarAlumno();
-                    break;
-                case "5":
-                    System.out.println("--Asignar profesores--");
-                    AsiganacionProf();
-
-                    break;
-                case "6":
-                    System.out.println("--Carga de notas--");
-
-
-                    break;
-                case "7":
-                    System.out.println("--Agregar usuarios al sistema --");
-                    nuevousuario();
-
-
-                    break;
-                case "8":
-                    System.out.println("--Reportar--");
-                    Alumno a = new Alumno(12, 326, "Carlos", "lasdf", "M");
-                    alumnos[0] = a;
-                    CrearReporteAlunos();
-
-
-                    break;
-                case "9":
-                    System.out.println("--Manejo de Errores -- ");
-                    break;
-
-                case "10":
-                    login();
-                    break;
-
-                case "11":
-                    flag = false;
-                    break;
 
                 default:
                     System.out.println("ERROR: OPCION INVALIDA ");
@@ -240,6 +186,58 @@ public class main {
 
         } while (flag);
     }
+    public static void submenu()
+    {
+        boolean flag = true;
+        do {
+            //Opciones del Menu
+            System.out.println("--REPORTES");
+
+            System.out.println("1.Reporte de Alumnos");
+            System.out.println("2.Reporte de Asignación de alumnos");
+            System.out.println("3.Reporte de Asignación de profesores");
+            System.out.println("4.Reporte General de Cursos ");
+            System.out.println("5.Reporte de Curso Específico");
+            System.out.println("6.Top 5 Mejors Alumnos de un Curso");
+            System.out.println("7.Regresar al menú");
+
+            String Op = sc.nextLine();
+            switch (Op) {
+                case "1":
+                    ReportandoAlumnos();
+
+                    break;
+                case "2":
+                    ReportandoAsinacionAlumnos();
+
+                    break;
+                case "3":
+                    ReportandoAsinacionProfesores();
+                    break;
+                case "4":
+                    ReportaandoReporteGeneralCuros();
+                    break;
+                case "5":
+                    //reporte de curso específico
+                    break;
+                case "6":
+                    //top 5 de alumnos
+                    break;
+                case "7":
+                    Menu2();
+                    break;
+
+
+
+                default:
+                    System.out.println("ERROR: OPCION INVALIDA ");
+                    System.out.println();
+                    break;
+            }
+
+        } while (flag);
+    }
+
 
     //Menu  Principal --
     public static void Menu() {
