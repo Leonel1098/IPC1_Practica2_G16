@@ -1335,7 +1335,8 @@ public class main {
     }
 
     public static String VReporteCursoEspesfifico = "";
-
+    ///Crea el Reporte de Curso Especifico <----------------------------------------Reporte  Cruso Esfico
+    
     public static void ReporteCursoEspecifico() {
         VReporteCursoEspesfifico += "<table class=\"steelBlueCols\">";
         VReporteCursoEspesfifico += "<thead><tr>"
