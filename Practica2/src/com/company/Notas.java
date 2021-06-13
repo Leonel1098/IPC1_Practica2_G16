@@ -7,7 +7,7 @@ public class Notas {
 
     public Notas(int idalumno, int idcurso, double nota){
         this.Idalumno = idalumno;
-        this.Idcurso = Idcurso;
+        this.Idcurso = idcurso;
         this.nota = nota;
 
     }

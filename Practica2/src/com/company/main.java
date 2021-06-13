@@ -1,7 +1,7 @@
 package com.company;
 
 import javax.xml.crypto.Data;
-import java.io. *;
+import java.io.*;
 
 import java.util.Date;
 import java.util.Queue;
@@ -23,9 +23,9 @@ public class main {
     static Notas[] notas = new Notas[100];
     static AsignarProfe[] asignarProfes = new AsignarProfe[30];
     //Contadores
-    static int contadorCursos ;
-    static int contadorNotas ;
-    static int asignarprofcont ;
+    static int contadorCursos;
+    static int contadorNotas;
+    static int asignarprofcont;
     public static usuarios[] u = new usuarios[6];
     public static int posicion = 0;
 
@@ -39,7 +39,7 @@ public class main {
 
     public static void login() {
         if (verif()) {
-            if (posicion==0) {
+            if (posicion == 0) {
                 System.out.println("Menu de admin");
                 Menu();
                /* CargarCursos();
@@ -49,8 +49,7 @@ public class main {
                 AsiganacionProf();
                 mostrarAsiganicionProf();*/
                 // CrearReporteCursos();
-            }else
-            {
+            } else {
                 System.out.println("Menu de usuario");
                 Menu2();
                /* mostrarCursos();
@@ -59,18 +58,17 @@ public class main {
                 // CrearReporteCursos();
 
             }
-        }
-        else
-        {
+        } else {
             System.out.println("Ingreso denegado");
             System.out.println();
-            login();}
+            login();
+        }
     }
 
     public static boolean verif() {
 
         boolean b = false;
-        char[] k = new char[]{'a','d','m','i','n'};
+        char[] k = new char[]{'a', 'd', 'm', 'i', 'n'};
         System.out.println(k);
         usuarios admin = new usuarios("admin", k);
         u[0] = admin;
@@ -78,14 +76,14 @@ public class main {
         String n = sc.nextLine();
         System.out.println("Ingrese contraseña");
         Console bbcita = System.console();
-        char[] contra= bbcita.readPassword();
+        char[] contra = bbcita.readPassword();
         System.out.println("Igrese de nuevo su contraseña");
         Console bblin = System.console();
-        char[] contra2= bblin.readPassword();
+        char[] contra2 = bblin.readPassword();
 
         for (int i = 0; i < u.length; i++)
             try {
-                if (u[i]!=null&&n.equals(u[i].getnombre()) &&java.util.Arrays.equals(u[i].getcontra(),contra) && java.util.Arrays.equals(contra2,contra)) {
+                if (u[i] != null && n.equals(u[i].getnombre()) && java.util.Arrays.equals(u[i].getcontra(), contra) && java.util.Arrays.equals(contra2, contra)) {
                     System.out.println("Bienvenido  " + u[i].getnombre());
                     posicion = i;
                     b = true;
@@ -111,30 +109,24 @@ public class main {
 
         System.out.println("Vuelva a ingresar la nueva ccontraseña");
         Console bblin = System.console();
-        char[]  contra2 = bblin.readPassword();
+        char[] contra2 = bblin.readPassword();
 
         try {
             for (int i = 0; i < u.length; i++)
 
-                if (u[i]!=null&&nn.equals(u[i].getnombre())) {
+                if (u[i] != null && nn.equals(u[i].getnombre())) {
                     System.out.println("Este nombre ya se encuentra registrado:  " + u[i].getnombre());
                     System.out.println("Ingrese un nuevo nombre de usuario y su respectiva conraseñaa");
                     System.out.println();
                     nuevousuario();
                     break;
-                }
-                else
-                {
-                    if (u[i]==null)
-                    {
-                        if (java.util.Arrays.equals(contra2,contra))
-                        {
-                            usuarios nuevo = new usuarios(nn,contra);
-                            u[i]=nuevo;
+                } else {
+                    if (u[i] == null) {
+                        if (java.util.Arrays.equals(contra2, contra)) {
+                            usuarios nuevo = new usuarios(nn, contra);
+                            u[i] = nuevo;
                             break;
-                        }
-                        else
-                        {
+                        } else {
                             System.out.println("Las contraseñas no coinciden");
                             nuevousuario();
                             break;
@@ -146,7 +138,6 @@ public class main {
 
         } catch (Exception e) {
             System.out.println("ya no se pueden agregar más usuarios");
-
 
 
         }
@@ -175,7 +166,8 @@ public class main {
 
                     break;
                 case "3":
-                    System.exit(12);break;
+                    System.exit(12);
+                    break;
 
 
                 default:
@@ -186,8 +178,8 @@ public class main {
 
         } while (flag);
     }
-    public static void submenu()
-    {
+
+    public static void submenu() {
         boolean flag = true;
         do {
             //Opciones del Menu
@@ -226,7 +218,6 @@ public class main {
                 case "7":
                     Menu2();
                     break;
-
 
 
                 default:
@@ -293,7 +284,7 @@ public class main {
                     break;
                 case "6":
                     System.out.println("--Carga de notas--");
-
+                    CargarNotas();
 
                     break;
                 case "7":
@@ -307,6 +298,7 @@ public class main {
 
                     CrearReporteAlunos();
                     CrearReporteGeneralCursoss();
+                    ReporteCursoEspecifico();
 
                     break;
                 case "9":
@@ -359,7 +351,7 @@ public class main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
-                int contLineas=1;
+                int contLineas = 1;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -385,7 +377,7 @@ public class main {
                     //EscribirPokemon(pokemons);
                     //y aumentamos a uno nuestro contador de pokemones;
                     contadorAlumnos++;
-                }catch (Exception e) {
+                } catch (Exception e) {
                     System.out.println(e.toString());
                     String error = e.getMessage();
                     String erro2 = e.getLocalizedMessage();
@@ -445,7 +437,7 @@ public class main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
-                int contLineas=1;
+                int contLineas = 1;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Profesores
                 System.out.println(linea);
@@ -472,19 +464,18 @@ public class main {
                     //EscribirPokemon(pokemons);
                     //y aumentamos a uno nuestro contador de pokemones;
                     contadorProfe++;
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println(e.toString());
-                    String error=e.getMessage();
-                    String erro2=e.getLocalizedMessage();
+                    String error = e.getMessage();
+                    String erro2 = e.getLocalizedMessage();
                     System.out.println(erro2);
-                    String DErr[]=error.split(":");
-                    if (DErr[0].equals("For input string")){
-                        System.out.println("Error en la Linea "+ contLineas);
-                        System.out.println(DErr[1]+" No es un Numero ");
+                    String DErr[] = error.split(":");
+                    if (DErr[0].equals("For input string")) {
+                        System.out.println("Error en la Linea " + contLineas);
+                        System.out.println(DErr[1] + " No es un Numero ");
                     }
 
                 }
-
 
 
             }
@@ -541,7 +532,7 @@ public class main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
-                int contLineas=2;
+                int contLineas = 2;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -565,18 +556,17 @@ public class main {
                     //EscribirPokemon(pokemons);
                     //y aumentamos a uno nuestro contador de pokemones;
                     contadorAsignacionAlunos++;
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println(e.toString());
-                    String error=e.getMessage();
-                    String erro2=e.getLocalizedMessage();
+                    String error = e.getMessage();
+                    String erro2 = e.getLocalizedMessage();
                     System.out.println(erro2);
-                    String DErr[]=error.split(":");
-                    if (DErr[0].equals("For input string")){
-                        System.out.println("Error en la Linea "+ contLineas);
-                        System.out.println(DErr[1]+" No es un Numero ");
+                    String DErr[] = error.split(":");
+                    if (DErr[0].equals("For input string")) {
+                        System.out.println("Error en la Linea " + contLineas);
+                        System.out.println(DErr[1] + " No es un Numero ");
                     }
                 }
-
 
 
             }
@@ -626,7 +616,7 @@ public class main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
-                int contLineas=0;
+                int contLineas = 0;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -651,15 +641,15 @@ public class main {
                     //EscribirPokemon(pokemons);
                     //y aumentamos a uno nuestro contador de pokemones;
                     contadorCursos++;
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println(e.toString());
-                    String error=e.getMessage();
-                    String erro2=e.getLocalizedMessage();
+                    String error = e.getMessage();
+                    String erro2 = e.getLocalizedMessage();
                     System.out.println(erro2);
-                    String DErr[]=error.split(":");
-                    if (DErr[0].equals("For input string")){
-                        System.out.println("Error en la Linea "+ contLineas);
-                        System.out.println(DErr[1]+" No es un Numero ");
+                    String DErr[] = error.split(":");
+                    if (DErr[0].equals("For input string")) {
+                        System.out.println("Error en la Linea " + contLineas);
+                        System.out.println(DErr[1] + " No es un Numero ");
                     }
                 }
 
@@ -717,7 +707,7 @@ public class main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
-                int contLineas=0;
+                int contLineas = 0;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -742,15 +732,15 @@ public class main {
                     //EscribirPokemon(pokemons);
                     //y aumentamos a uno nuestro contador de pokemones;
                     contadorNotas++;
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println(e.toString());
-                    String error=e.getMessage();
-                    String erro2=e.getLocalizedMessage();
+                    String error = e.getMessage();
+                    String erro2 = e.getLocalizedMessage();
                     System.out.println(erro2);
-                    String DErr[]=error.split(":");
-                    if (DErr[0].equals("For input string")){
-                        System.out.println("Error en la Linea "+ contLineas);
-                        System.out.println(DErr[1]+" No es un Numero ");
+                    String DErr[] = error.split(":");
+                    if (DErr[0].equals("For input string")) {
+                        System.out.println("Error en la Linea " + contLineas);
+                        System.out.println(DErr[1] + " No es un Numero ");
                     }
                 }
 
@@ -808,7 +798,7 @@ public class main {
             //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
-                int contLineas=1;
+                int contLineas = 1;
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -832,15 +822,15 @@ public class main {
                     //EscribirPokemon(pokemons);
                     //y aumentamos a uno nuestro contador de pokemones;
                     asignarprofcont++;
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println(e.toString());
-                    String error=e.getMessage();
-                    String erro2=e.getLocalizedMessage();
+                    String error = e.getMessage();
+                    String erro2 = e.getLocalizedMessage();
                     System.out.println(erro2);
-                    String DErr[]=error.split(":");
-                    if (DErr[0].equals("For input string")){
-                        System.out.println("Error en la Linea "+ contLineas);
-                        System.out.println(DErr[1]+" No es un Numero ");
+                    String DErr[] = error.split(":");
+                    if (DErr[0].equals("For input string")) {
+                        System.out.println("Error en la Linea " + contLineas);
+                        System.out.println(DErr[1] + " No es un Numero ");
                     }
 
                 }
@@ -942,7 +932,6 @@ public class main {
     }
 
 
-
     public static void ReportandoAlumnos() {
 
         for (int i = 0; i < contadorAlumnos; i++) {
@@ -958,7 +947,6 @@ public class main {
             String Datos[] = Fecha.split("/");
             int edad = Integer.parseInt(Datos[2]);
             edad = 2021 - edad;
-
 
 
             ReporteAlumnos += "<!----tabla 2-->\n" +
@@ -1022,10 +1010,10 @@ public class main {
                     "<th>Nombre de Curso </th> </tr>" +
                     "</thead>\n" +
                     "<tbody>\n" +
-                    "   <tr> <td>" +BuscarCarneAlumno(AsignacionesAlumnos[i].getIdAlumno() ) + "</td>" +
+                    "   <tr> <td>" + BuscarCarneAlumno(AsignacionesAlumnos[i].getIdAlumno()) + "</td>" +
                     " <td>" + BuscarNombreAlumnos(AsignacionesAlumnos[i].getIdAlumno()) + " </td> " +
-                    " <td>" + BuscarCodigodeCurso(AsignacionesAlumnos[i].getIdCurso())+ " </td> " +
-                    " <td>" + BuscarNombreCurso(AsignacionesAlumnos[i].getIdCurso())  + " </td> " +
+                    " <td>" + BuscarCodigodeCurso(AsignacionesAlumnos[i].getIdCurso()) + " </td> " +
+                    " <td>" + BuscarNombreCurso(AsignacionesAlumnos[i].getIdCurso()) + " </td> " +
 
 
                     "</tbody>\n" +
@@ -1037,6 +1025,7 @@ public class main {
 
 
     }
+
     public static void CrearReporteAsignacionProfesores() {
         variableReporte();
 
@@ -1046,6 +1035,7 @@ public class main {
                 + "<th>  " + new Date().toString() + "</th>"
                 + "</tr> "
                 + "</ thead ></table>";
+        ReportandoAsinacionProfesores();
         try {
 
             FileWriter archivo = new FileWriter("ReporteAsignacionProfesores.html");
@@ -1070,10 +1060,10 @@ public class main {
                     "<th>Nombre de Curso </th> </tr>" +
                     "</thead>\n" +
                     "<tbody>\n" +
-                    "   <tr> <td>" +BuscarRegistroPersonal(asignarProfes[i].getIdProf() ) + "</td>" +
+                    "   <tr> <td>" + BuscarRegistroPersonal(asignarProfes[i].getIdProf()) + "</td>" +
                     " <td>" + BuscarNombreProfesor(asignarProfes[i].getIdProf()) + " </td> " +
-                    " <td>" + BuscarCodigodeCurso(asignarProfes[i].getIdCurso())+ " </td> " +
-                    " <td>" + BuscarNombreCurso(asignarProfes[i].getIdCurso())  + " </td> " +
+                    " <td>" + BuscarCodigodeCurso(asignarProfes[i].getIdCurso()) + " </td> " +
+                    " <td>" + BuscarNombreCurso(asignarProfes[i].getIdCurso()) + " </td> " +
 
 
                     "</tbody>\n" +
@@ -1082,10 +1072,11 @@ public class main {
         }
 
     }
+
     //-------------------------------------------------------------------------
     public static String BuscarNombreAlumnos(int id) {
         for (int i = 0; i < contadorAlumnos; i++) {
-            if (alumnos[i].getId()==id){
+            if (alumnos[i].getId() == id) {
                 return alumnos[i].getNombre();
 
             }
@@ -1093,9 +1084,10 @@ public class main {
         }
         return "";
     }
-    public static int BuscarCarneAlumno(int id){
+
+    public static int BuscarCarneAlumno(int id) {
         for (int i = 0; i < contadorAlumnos; i++) {
-            if (alumnos[i].getId()==id){
+            if (alumnos[i].getId() == id) {
                 return alumnos[i].getCarne();
 
             }
@@ -1103,24 +1095,25 @@ public class main {
         }
 
 
-
         return 0;
     }
-    public static String BuscarNombreCurso(int id ){
-        for (int i =0 ; i<contadorCursos;i++){
-            if (id == curso[i].getId()){
+
+    public static String BuscarNombreCurso(int id) {
+        for (int i = 0; i < contadorCursos; i++) {
+            if (id == curso[i].getId()) {
                 System.out.println(curso[i].getNombre());
                 return curso[i].getNombre();
             }
         }
+
+
         return "";
 
-
-
     }
-    public static int BuscarCodigodeCurso(int id ){
-        for (int i =0 ; i<contadorCursos;i++){
-            if (id == curso[i].getId()){
+
+    public static int BuscarCodigodeCurso(int id) {
+        for (int i = 0; i < contadorCursos; i++) {
+            if (id == curso[i].getId()) {
                 System.out.println(curso[i].getCodigo());
                 return curso[i].getCodigo();
             }
@@ -1129,9 +1122,9 @@ public class main {
     }
 
 
-    public static String BuscarNombreProfesor(int id){
-        for (int i =0 ; i<contadorProfe;i++){
-            if (id == profesores[i].getId()){
+    public static String BuscarNombreProfesor(int id) {
+        for (int i = 0; i < contadorProfe; i++) {
+            if (id == profesores[i].getId()) {
                 return profesores[i].getNombre();
             }
 
@@ -1140,9 +1133,9 @@ public class main {
         return "";
     }
 
-    public static int BuscarRegistroPersonal(int id){
-        for (int i =0 ; i<contadorProfe;i++){
-            if (id == profesores[i].getId()){
+    public static int BuscarRegistroPersonal(int id) {
+        for (int i = 0; i < contadorProfe; i++) {
+            if (id == profesores[i].getId()) {
                 System.out.println(profesores[i].getRegistroPersonal());
                 return profesores[i].getRegistroPersonal();
             }
@@ -1178,11 +1171,10 @@ public class main {
     }
 
 
+    public static void ReportaandoReporteGeneralCuros() {
+        for (int i = 0; i < contadorCursos; i++) {
 
-    public static void ReportaandoReporteGeneralCuros(){
-        for (int i =0 ; i<contadorCursos;i++){
-
-
+            VReporteGEneralCursos += "<table class=\"steelBlueCols\">";
             VReporteGEneralCursos += "<!----tabla 2-->\n" +
                     "<table class=\"steelBlueCols\">\n" +
                     "<thead>\n" +
@@ -1192,10 +1184,9 @@ public class main {
 
                     "</thead>\n" +
                     "<tbody>\n" +
-                    "   <tr> <td>" +curso[i].getNombre() + "</td>" +
+                    "   <tr> <td>" + curso[i].getNombre() + "</td>" +
                     " <td>" + curso[i].getCodigo() + " </td> " +
                     " <td>" + contadorAlumnosEnCursos(curso[i].getId()) + " </td> " +
-
 
 
                     "</tbody>\n" +
@@ -1203,23 +1194,16 @@ public class main {
                     " <!----termina tabla 2-->";
 
 
-
-
-
-
-
-
-
         }
-
 
 
     }
 
-    public static int contadorAlumnosEnCursos(int idCurso){
-        int NoAlunmons=0;;
-        for (int i =0 ; i<contadorAsignacionAlunos;i++){
-            if(idCurso==AsignacionesAlumnos[i].getIdCurso()){
+    public static int contadorAlumnosEnCursos(int idCurso) {
+        int NoAlunmons = 0;
+        ;
+        for (int i = 0; i < contadorAsignacionAlunos; i++) {
+            if (idCurso == AsignacionesAlumnos[i].getIdCurso()) {
                 NoAlunmons++;
             }
         }
@@ -1227,24 +1211,53 @@ public class main {
 
         return NoAlunmons;
     }
-    //Reporet Cursos espesificos 
-    public static void ReporteCursoEspecifico(){
+
+    //Reporet Cursos espesificos
+    public static void EncabezadoReporteCursoEspecifico() {
         //Emcabezado ------
         System.out.println("ingrese Codigo Curso");
-        int CodigoCurso=sc.nextInt();
-        String NombreCurso=BuscarNombreCurso(CodigoCurso);
-        int idCurso=BuscarIdCurso(CodigoCurso);
-        int idPrfe=BuscarIdProfe(idCurso);
+        int CodigoCurso = sc.nextInt();
+
+
+        int idCurso = BuscarIdCurso(CodigoCurso);
+        String NombreCurso = BuscarNombreCurso(idCurso);
+        System.out.println(idCurso);
+        System.out.println(NombreCurso);
+        ;
+
+
+        VReporteCursoEspesfifico += "<table class=\"steelBlueCols\">";
+        VReporteCursoEspesfifico += "<thead><tr>"
+                + "<th>  " + "Curso" + "</th>"
+                + "<th>  " + CodigoCurso + "</th>"
+                + "<th>  " + NombreCurso + "</th>"
+
+
+                + "</tr> "
+                + "</ thead ></table>";
+        int idPrfe = BuscarIdProfe(idCurso);
         String NombreProfe = BuscarNombreProfesor(idPrfe);
-        int RPersonalProf=BuscarRegistroPersonal(idPrfe);
-        int []alumnos=AlumnosEnCurso(idCurso);
-        int []carnets;
+        int RPersonalProf = BuscarRegistroPersonal(idPrfe);
+        VReporteCursoEspesfifico += "<table class=\"steelBlueCols\">";
+        VReporteCursoEspesfifico += "<thead><tr>"
+                + "<th>  " + "Profesor" + "</th>"
+                + "<th>  " + RPersonalProf + "</th>"
+                + "<th>  " + NombreProfe + "</th>"
+
+                + "</tr> "
+                + "</ thead ></table>";
+        System.out.println(idCurso+"<-------");
+        AlumnosEnCurso(idCurso);
+        System.out.println("sale Encabezado ");
+
 
 
     }
-    public static int BuscarIdCurso(int CodigoCurso){
-        for (int i=0; i<contadorCursos;i++){
-            if(CodigoCurso==curso[i].getCodigo()){
+
+    public static int BuscarIdCurso(int CodigoCurso) {
+
+        for (int i = 0; i < contadorCursos; i++) {
+            if (CodigoCurso == curso[i].getCodigo()) {
                 return curso[i].getId();
             }
         }
@@ -1252,45 +1265,105 @@ public class main {
     }
 
 
-    public static int BuscarIdProfe(int idCurso){
-        for (int i =0 ; i<asignarprofcont;i++){
-            if (idCurso == asignarProfes[i].getIdCurso()){
+    public static int BuscarIdProfe(int idCurso) {
+        for (int i = 0; i < asignarprofcont; i++) {
+            if (idCurso == asignarProfes[i].getIdCurso()) {
                 return asignarProfes[i].getIdProf();
             }
         }
         return 0;
 
     }
-    public static int []AlumnosEnCurso(int idCurso){
-        int Alumnos[]=null;
-        for (int i =0 ; i< contadorAsignacionAlunos;i++){
-            if (idCurso==AsignacionesAlumnos[i].getIdCurso()){
-                Alumnos[i]=AsignacionesAlumnos[i].getIdAlumno();
-            }
-        }
-        return Alumnos;
-    }
-    //Repeporte de Cuerpo de Reporte Espesifico
-    public static void CueropoReporteCursoEspesifico(int idAlumno){
 
-        for (int i=0;i<contadorAlumnos;i++){
-            if (idAlumno==alumnos[i].getId()){
-               int Carne=alumnos[i].getCarne();
-               String Nombre =alumnos[i].getNombre();
-               double nota=BuscarNota(idAlumno);
+    public static void AlumnosEnCurso(int idCurso) {
+        System.out.println("alumnos en Cuerso");
 
+        for (int i = 0; i < contadorNotas; i++) {
+
+            if (idCurso == notas[i].getIdcurso()) {
+                System.out.println(i);
+                System.out.println(notas[i].getIdalumno());
+                CueropoReporteCursoEspesifico(notas[i].getIdalumno());
 
             }
         }
+    }
+
+
+    //Repeporte de Cuerpo de Reporte Espesifico----------------------
+    public static   void CueropoReporteCursoEspesifico(int idAlumno) {
+        System.out.println("Entra Al Cuerpo");
+        for (int i = 0; i < contadorAlumnos; i++) {
+            if (idAlumno == alumnos[i].getId()) {
+                int Carne = alumnos[i].getCarne();
+                String Nombre = alumnos[i].getNombre();
+                System.out.println(Nombre);
+
+
+
+                    VReporteCursoEspesfifico += "<!----tabla 2-->\n" +
+                            "<table class=\"steelBlueCols\">\n" +
+                            "<thead>\n" +
+                            "   <tr> <th>Carne Personal</th> " +
+                            "<th>Nombre  </th> " +
+                            "<th> Nota </th>" +
+                            "<th>Estatus  </th> </tr>" +
+                            "</thead>\n" +
+                            "<tbody>\n" +
+                            "   <tr> <td>" + Carne + "</td>" +
+                            " <td>" + Nombre + " </td> " +
+                            " <td>" + BuscarNota(idAlumno) + " </td> " +
+                            " <td>" + Estatus(BuscarNota(idAlumno))+ " </td> " +
+
+                            "</tbody>\n" +
+                            "</table>\n" +
+                            " <!----termina tabla 2-->";
+
+
+            }
+        }
 
     }
-    public static double BuscarNota(int idAlumno){
-        for (int i =0 ;i<contadorNotas;i++){
-            if (idAlumno==notas[i].getIdalumno()){
 
+    public static double BuscarNota(int idAlumno) {
+        for (int i = 0; i < contadorNotas; i++) {
+            if (idAlumno == notas[i].getIdalumno()) {
                 return notas[i].getNota();
             }
         }
         return 0;
+    }
+
+    public static String VReporteCursoEspesfifico = "";
+
+    public static void ReporteCursoEspecifico() {
+        VReporteCursoEspesfifico += "<table class=\"steelBlueCols\">";
+        VReporteCursoEspesfifico += "<thead><tr>"
+                + "<th>  " + "REPORTE CURSO ESPESIFICO" + "</th>"
+                + "<th>  " + new Date().toString() + "</th>"
+                + "</tr> "
+                + "</ thead ></table>";
+        EncabezadoReporteCursoEspecifico();
+        try {
+
+            FileWriter archivo = new FileWriter("ReporteCursoEspecifico000.html");
+            archivo.write(ReporteInicio + VReporteCursoEspesfifico + ReporteFinal);
+            archivo.close();
+
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public static String Estatus(double nota) {
+        if (nota > 61.0) {
+            return "Aprobado";
+        }
+        if (nota < 60.9) {
+            return "Reprobado";
+        } else {
+            return "###";
+        }
     }
 }
