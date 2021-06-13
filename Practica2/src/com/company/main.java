@@ -1,5 +1,7 @@
 package com.company;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import javax.xml.crypto.Data;
 import java.io.*;
 
@@ -258,12 +260,13 @@ public class main {
                     System.out.printf("t----------------------");
                     mostrarAlumons();
                     System.out.println("-------------------------");
+                    CrearReporLogAlumnos();
                     ReportandoAsinacionAlumnos();
                     break;
                 case "2":
                     System.out.println("--Cargar Profesores ---");
                     CargarProfesores();
-
+                    CrearReporLogProfesores();
                     break;
                 case "3":
                     System.out.println("**Cargar Cursos--");
@@ -351,8 +354,9 @@ public class main {
             // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
             //antes de la lectura
             String linea = br.readLine();
+            int contLineas = 1;
             while ((linea = br.readLine()) != null) {
-                int contLineas = 1;
+
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
@@ -367,24 +371,34 @@ public class main {
                 System.out.println(Datos[4]);
 
                 if (Datos[0].matches(".[/!#$%&/()=¿) ].*")) {
+                    VariableParaGuardarLog += "Linea " + contLineas + " Error en id Caracter incorrecto\n";
+                    contLineas++;
                     break;
                 }
                 if (Datos[1].matches(".[/!#$%&/()=¿)].*")) {
+                    VariableParaGuardarLog += "Linea " + contLineas + " Error en Carne Caracter incorrecto\n";
+                    contLineas++;
                     break;
                 }
                 if (Datos[2].matches(".[/123456789!#$%&/()=¿)].*")) {
+                    VariableParaGuardarLog += "Linea " + contLineas + " Error en Nombre Caracter incorrecto\n";
+                    contLineas++;
                     break;
                 }
-                if (Datos[3].matches(".[/!#$%&/()=¿)].*")) {
+                if (Datos[3].matches(".[!#$%&()=¿)].*")) {
+                    VariableParaGuardarLog +="Linea " + contLineas + "  Error en Fecha de NAcimiento Caracter incorrecto\n";
+                    contLineas++;
                     break;
                 }
                 if (Datos[4].matches(".[/!#$%&/()=¿)].*")) {
+                    VariableParaGuardarLog += "Linea  " + contLineas + "  Error en id GEenero  incorrecto\n";
+                    contLineas++;
                     break;
                 }
                 //Verificar Carne
                 for (int i = 0; i < contadorAlumnos; i++) {
                     if (Datos[1].equals(alumnos[i].getCarne())) {
-
+                        VariableParaGuardarLog += "Linea  " + contLineas + "  Error en Cerne caracter  incorrecto\n";
                         break;
                     }
                 }
@@ -400,38 +414,48 @@ public class main {
                     String nombre = Datos[2];
                     String Fnac = Datos[3];
                     String Genero = Datos[4];
-                    boolean CarneRepetido=false;
+
+                    boolean CarneRepetido = false;
                     for (int i = 0; i < contadorAlumnos; i++) {
                         if (Carne == alumnos[i].getCarne()) {
 
-                            CarneRepetido=true;
+                            CarneRepetido = true;
 
                         }
                     }
-                    if (CarneRepetido ){
+                    if (CarneRepetido) {
+                        VariableParaGuardarLog += "Linea  : " + contLineas + "  Error en Cerne Repetido  incorrecto\n";
+                        contLineas++;
                         continue;
                     }
-                    boolean idRepetido=false;
-                    for (int i =0 ;i<contadorAlumnos;i++){
-                        if (id==alumnos[i].getId()){
-                            idRepetido=true;
+                    boolean idRepetido = false;
+                    for (int i = 0; i < contadorAlumnos; i++) {
+                        if (id == alumnos[i].getId()) {
+                            idRepetido = true;
                         }
                     }
-                    if (idRepetido){
+                    if (idRepetido) {
+                        VariableParaGuardarLog += "Linea : " + contLineas + " Error  en Id Repetido  incorrecto\n";
+                        contLineas++;
                         continue;
                     }
                     if (!Genero.equals("M")) {
                         if (!Genero.equals("F")) {
+                            VariableParaGuardarLog += "Linea ;  " + contLineas + "  Error en GEnero  caracter  incorrecto\n";
+                            contLineas++;
                             continue;
                         }
                     }
                     if (Genero.equals(" ")) {
+                        VariableParaGuardarLog += "Linea ; " + contLineas + "  Error en  caracter  incorrecto\n";
+                        contLineas++;
                         continue;
                     }
                     if (Genero.equals("")) {
+                        VariableParaGuardarLog += "Linea ;" + contLineas + "  Error en  caracter  incorrecto\n";
+                        contLineas++;
                         continue;
                     }
-
 
 
                     Alumno nuevo = new Alumno(id, Carne, nombre, Fnac, Genero);
@@ -454,6 +478,7 @@ public class main {
                     if (DErr[0].equals("For input string")) {
                         System.out.println("Error en la Linea " + contLineas);
                         System.out.println(DErr[1] + " No es un Numero ");
+                        VariableParaGuardarLog += "Linea:  " + contLineas + "   Error en  caracter  incorrecto\n";
 
                     }
 
@@ -465,13 +490,14 @@ public class main {
             System.out.println(e);
             System.out.println("ERROR EN LA CARGA DEL ARCHIVO");
 
+
         } finally {
             try {
                 if (null != fr) {
                     fr.close();
                 }
             } catch (Exception e2) {
-                System.out.println(e2);
+
                 System.out.println("ERROR EN LA CARGA DEL ARCHIVO");
             }
 
@@ -504,13 +530,57 @@ public class main {
             // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
             //antes de la lectura
             String linea = br.readLine();
+            int contLineas = 1;
             while ((linea = br.readLine()) != null) {
-                int contLineas = 1;
+
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Profesores
                 System.out.println(linea);
                 // Separando los datos por una coma
                 String[] Datos = linea.split(",");
+                Datos[0] = Datos[0].replaceAll(" ", "");
+                Datos[1] = Datos[1].replaceAll(" ", "");
+                Datos[3] = Datos[3].replaceAll(" ", "");
+                Datos[4] = Datos[4].replaceAll(" ", "");
+                Datos[5] = Datos[5].replaceAll(" ", "");
+
+
+                if (Datos[0].matches(".[/!#$%&/()=¿) ].*")) {
+                    VariableParaGuardarLogProfes += "Linea " + contLineas + " Error en id Caracter incorrecto\n";
+                    contLineas++;
+                    continue;
+                }
+                if (Datos[1].matches(".[/!#$%&/()=¿)].*")) {
+                    VariableParaGuardarLogProfes += "Linea " + contLineas + " Error en Carne Caracter incorrecto\n";
+                    contLineas++;
+                    continue;
+                }
+                if (Datos[2].matches(".[/123456789!#$%&/()=¿)].*")) {
+                    VariableParaGuardarLogProfes += "Linea " + contLineas + " Error en Nombre Caracter incorrecto\n";
+                    contLineas++;
+                    continue;
+                }
+                if (Datos[3].matches(".[!#$%&()=¿)].*")) {
+                    VariableParaGuardarLogProfes +="Linea " + contLineas + "  Error en Fecha de NAcimiento Caracter incorrecto\n";
+                    contLineas++;
+                    continue;
+                }
+                if (Datos[4].matches(".[!#$%&()=¿)].*")) {
+                    VariableParaGuardarLogProfes += "Linea  " + contLineas + "  Error en id GEenero  incorrecto\n";
+                    contLineas++;
+                    continue;
+                } if (Datos[5].matches(".[!#$%&()=¿)].*")) {
+                    VariableParaGuardarLogProfes += "Linea  " + contLineas + "  Error en id GEenero  incorrecto\n";
+                    contLineas++;
+                    continue;
+                }
+                //Verificar Carne
+                for (int i = 0; i < contadorProfe; i++) {
+                    if (Datos[1].equals( profesores[i]. getRegistroPersonal())) {
+                        VariableParaGuardarLogProfes += "Linea  " + contLineas + "  Error en Registro Personal caracter  incorrecto\n";
+                        break;
+                    }
+                }
 
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
@@ -523,6 +593,50 @@ public class main {
                     String Fnac = Datos[3];
                     String FContrato = Datos[4];
                     String Genero = Datos[5];
+                    boolean RpRepetido = false;
+                    for (int i = 0; i < contadorProfe; i++) {
+                        if (Registro_de_Personal == profesores[i]. getRegistroPersonal()) {
+
+                            RpRepetido = true;
+
+                        }
+                    }
+                    if (RpRepetido) {
+                        VariableParaGuardarLogProfes += "Linea  : " + contLineas + "  Error en RegistroPersonal  incorrecto\n";
+                        contLineas++;
+                        continue;
+                    }
+                    boolean idRepetido = false;
+                    for (int i = 0; i < contadorProfe; i++) {
+                        if (id == profesores[i].getId()) {
+                            idRepetido = true;
+                        }
+                    }
+                    if (idRepetido) {
+                        VariableParaGuardarLogProfes += "Linea : " + contLineas + " Error  en Id Repetido  incorrecto\n";
+                        contLineas++;
+                        continue;
+                    }
+                    if (!Genero.equals("M")) {
+                        if (!Genero.equals("F")) {
+                            VariableParaGuardarLogProfes += "Linea ;  " + contLineas + "  Error en GEnero  caracter  incorrecto\n";
+                            contLineas++;
+                            continue;
+                        }
+                    }
+                    if (Genero.equals(" ")) {
+                        VariableParaGuardarLogProfes += "Linea ; " + contLineas + "  Error en  caracter  incorrecto\n";
+                        contLineas++;
+                        continue;
+                    }
+                    if (Genero.equals("")) {
+                        VariableParaGuardarLogProfes += "Linea ;" + contLineas + "  Error en  caracter  incorrecto\n";
+                        contLineas++;
+                        continue;
+                    }
+
+
+
 
                     //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
 
@@ -563,6 +677,10 @@ public class main {
             }
 
         }
+        for (int i =0;i<contadorProfe;i++){
+            System.out.println(profesores[i].getId()+"|"+profesores[i].getNombre());
+        }
+
     }
 
     public static void mostrarAlumons() {
@@ -679,17 +797,56 @@ public class main {
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
 
+
+
+
+
+
+
+
+
             // LEYENDO EL ARCHIVO
             // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
             //antes de la lectura
             String linea = br.readLine();
+            int contLineas = 1;
             while ((linea = br.readLine()) != null) {
-                int contLineas = 0;
+
                 // Aqui estamos leyendo fila por fila, entonces vamos a
                 //almacenar esa informacion en nuestro arreglo de Alumnos
                 System.out.println(linea);
                 // Separando los datos por una coma
                 String[] Datos = linea.split(",");
+                Datos[0] = Datos[0].replaceAll(" ", "");
+                Datos[1] = Datos[1].replaceAll(" ", "");
+                ;
+
+
+
+
+                if (Datos[0].matches(".[/!#$%&/()=¿) ].*")) {
+                    VLogCurso += "Linea " + contLineas + " Error en id Caracter incorrecto\n";
+                    contLineas++;
+                    continue;
+                }
+                if (Datos[1].matches(".[/!#$%&/()=¿)].*")) {
+                    VLogCurso += "Linea " + contLineas + " Error en Carne Caracter incorrecto\n";
+                    contLineas++;
+                    continue;
+                }
+                if (Datos[2].matches(".[/!#$%&/()=¿)].*")) {
+                    VLogCurso += "Linea " + contLineas + " Error en Nombre Caracter incorrecto\n";
+                    contLineas++;
+                    continue;
+                }
+
+                //Verificar Carne
+
+
+
+
+
+
 
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
@@ -699,6 +856,41 @@ public class main {
                     int id = Integer.parseInt(Datos[0]);
                     int codigo = Integer.parseInt(Datos[1]);
                     String nombre = Datos[2];
+                    boolean ids=false;
+                    for (int i =0;i<contadorCursos;i++){
+                        if (id==curso[i].getId()){
+                            ids=true;
+                        }
+                    }
+                    if (ids){
+                        VLogCurso += "Linea : " + contLineas + " Error  en id Repetido  incorrecto\n";
+                        contLineas++;
+                        continue;
+                    }
+
+                    boolean cod = false;
+                    for (int i = 0; i < contadorCursos; i++) {
+                        if (codigo == curso[i].getCodigo()) {
+                            cod = true;
+                        }
+                    }
+                    if (cod) {
+                        VLogCurso += "Linea : " + contLineas + " Error  en Codigod Repetido  incorrecto\n";
+                        contLineas++;
+                        continue;
+                    }
+
+                    if (nombre.equals(" ")) {
+                        VLogCurso += "Linea ; " + contLineas + "  Error en  caracter  incorrecto\n";
+                        contLineas++;
+                        continue;
+                    }
+                    if (nombre.equals("")) {
+                        VLogCurso += "Linea ;" + contLineas + "  Error en  caracter  incorrecto\n";
+                        contLineas++;
+                        continue;
+                    }
+
 
 
                     //Con nuestros datos, Alumno crear un objeto de tipo Alumno
@@ -739,6 +931,8 @@ public class main {
             }
 
         }
+        CrearReporLogCursos();
+        mostrarCursos();
     }
 
     public static void mostrarCursos() {
@@ -1433,4 +1627,63 @@ public class main {
             return "###";
         }
     }
+
+    //-------------------------------------------------
+    //Creado LogAlumnos  <------------------------------------------------------Log
+    static String VariableParaGuardarLog="";
+
+
+    public static void CrearReporLogAlumnos() {
+        System.out.println("SE DETERCTARON ERRORES LOS PUEDE VER EN logALUMNOS.csv\n ");
+        VariableParaGuardarLog +=" REPORET DE LOG Alumnos\n";
+        String date= new Date().toString();
+        VariableParaGuardarLog +="Fecha / Hora "+date +"\n";
+        try {
+
+            FileWriter archivo = new FileWriter("logALUMNOS.csv");
+            archivo.write(ReporteInicio + VariableParaGuardarLog + ReporteFinal);
+            archivo.close();
+
+        } catch (Exception e) {
+
+        }
+    }
+    //Creado Profesores  <------------------------------------------------------Log
+    static String VariableParaGuardarLogProfes="";
+    public static void CrearReporLogProfesores() {
+        System.out.println("SE DETERCTARON ERRORES LOS PUEDE VER EN logProfesoresS.csv\n ");
+        VariableParaGuardarLogProfes +=" REPORET DE LOG Alumnos\n";
+        String date= new Date().toString();
+        VariableParaGuardarLogProfes +="Fecha / Hora "+date +"\n";
+        try {
+
+            FileWriter archivo = new FileWriter("logPROFESORES.csv");
+            archivo.write(ReporteInicio + VariableParaGuardarLogProfes + ReporteFinal);
+            archivo.close();
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    //Crear log Cusos
+    static String VLogCurso="";
+    public static void CrearReporLogCursos() {
+        System.out.println("SE DETERCTARON ERRORES LOS PUEDE VER EN logCUROSS.csv\n ");
+        VLogCurso +=" REPORET DE LOG Alumnos\n";
+        String date= new Date().toString();
+        VLogCurso +="Fecha / Hora "+date +"\n";
+        try {
+
+            FileWriter archivo = new FileWriter("logCURSOS.csv");
+            archivo.write(ReporteInicio + VLogCurso + ReporteFinal);
+            archivo.close();
+
+        } catch (Exception e) {
+
+        }
+    }
+
+
+    //
 }
