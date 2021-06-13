@@ -3,6 +3,7 @@ package com.company;
 import javax.xml.crypto.Data;
 import java.io.*;
 
+import java.text.BreakIterator;
 import java.util.Date;
 import java.util.Queue;
 import java.util.Scanner;
@@ -257,7 +258,7 @@ public class main {
                     System.out.printf("t----------------------");
                     mostrarAlumons();
                     System.out.println("-------------------------");
-
+                    ReportandoAsinacionAlumnos();
                     break;
                 case "2":
                     System.out.println("--Cargar Profesores ---");
@@ -358,6 +359,37 @@ public class main {
                 // Separando los datos por una coma
                 String[] Datos = linea.split(",");
 
+
+                Datos[0] = Datos[0].replaceAll(" ", "");
+                Datos[1] = Datos[1].replaceAll(" ", "");
+                Datos[3] = Datos[3].replaceAll(" ", "");
+                Datos[4] = Datos[4].replaceAll(" ", "");
+                System.out.println(Datos[4]);
+
+                if (Datos[0].matches(".[/!#$%&/()=¿) ].*")) {
+                    break;
+                }
+                if (Datos[1].matches(".[/!#$%&/()=¿)].*")) {
+                    break;
+                }
+                if (Datos[2].matches(".[/123456789!#$%&/()=¿)].*")) {
+                    break;
+                }
+                if (Datos[3].matches(".[/!#$%&/()=¿)].*")) {
+                    break;
+                }
+                if (Datos[4].matches(".[/!#$%&/()=¿)].*")) {
+                    break;
+                }
+                //Verificar Carne
+                for (int i = 0; i < contadorAlumnos; i++) {
+                    if (Datos[1].equals(alumnos[i].getCarne())) {
+
+                        break;
+                    }
+                }
+
+
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
                 //necesario convertimos los datos
@@ -368,8 +400,39 @@ public class main {
                     String nombre = Datos[2];
                     String Fnac = Datos[3];
                     String Genero = Datos[4];
+                    boolean CarneRepetido=false;
+                    for (int i = 0; i < contadorAlumnos; i++) {
+                        if (Carne == alumnos[i].getCarne()) {
 
-                    //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
+                            CarneRepetido=true;
+
+                        }
+                    }
+                    if (CarneRepetido ){
+                        continue;
+                    }
+                    boolean idRepetido=false;
+                    for (int i =0 ;i<contadorAlumnos;i++){
+                        if (id==alumnos[i].getId()){
+                            idRepetido=true;
+                        }
+                    }
+                    if (idRepetido){
+                        continue;
+                    }
+                    if (!Genero.equals("M")) {
+                        if (!Genero.equals("F")) {
+                            continue;
+                        }
+                    }
+                    if (Genero.equals(" ")) {
+                        continue;
+                    }
+                    if (Genero.equals("")) {
+                        continue;
+                    }
+
+
 
                     Alumno nuevo = new Alumno(id, Carne, nombre, Fnac, Genero);
                     //agregamos este objeto a nuestro arreglo
@@ -377,6 +440,11 @@ public class main {
                     //EscribirPokemon(pokemons);
                     //y aumentamos a uno nuestro contador de pokemones;
                     contadorAlumnos++;
+
+
+                    //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
+
+
                 } catch (Exception e) {
                     System.out.println(e.toString());
                     String error = e.getMessage();
@@ -500,7 +568,7 @@ public class main {
     public static void mostrarAlumons() {
         System.out.println("Mostrando Todos los Datos Dentro Del Objeto ");
         for (int i = 0; i < contadorAlumnos; i++) {
-            System.out.println("Nombre : " + alumnos[i].getNombre() + " Carne :"
+            System.out.println(alumnos[i].getId() + "   Nombre : " + alumnos[i].getNombre() + " Carne :"
                     + alumnos[i].getCarne() + " Genero : " + alumnos[i].getGenero());
         }
     }
@@ -1246,10 +1314,9 @@ public class main {
 
                 + "</tr> "
                 + "</ thead ></table>";
-        System.out.println(idCurso+"<-------");
+        System.out.println(idCurso + "<-------");
         AlumnosEnCurso(idCurso);
         System.out.println("sale Encabezado ");
-
 
 
     }
@@ -1291,7 +1358,7 @@ public class main {
 
 
     //Repeporte de Cuerpo de Reporte Espesifico----------------------
-    public static   void CueropoReporteCursoEspesifico(int idAlumno) {
+    public static void CueropoReporteCursoEspesifico(int idAlumno) {
         System.out.println("Entra Al Cuerpo");
         for (int i = 0; i < contadorAlumnos; i++) {
             if (idAlumno == alumnos[i].getId()) {
@@ -1300,24 +1367,23 @@ public class main {
                 System.out.println(Nombre);
 
 
+                VReporteCursoEspesfifico += "<!----tabla 2-->\n" +
+                        "<table class=\"steelBlueCols\">\n" +
+                        "<thead>\n" +
+                        "   <tr> <th>Carne Personal</th> " +
+                        "<th>Nombre  </th> " +
+                        "<th> Nota </th>" +
+                        "<th>Estatus  </th> </tr>" +
+                        "</thead>\n" +
+                        "<tbody>\n" +
+                        "   <tr> <td>" + Carne + "</td>" +
+                        " <td>" + Nombre + " </td> " +
+                        " <td>" + BuscarNota(idAlumno) + " </td> " +
+                        " <td>" + Estatus(BuscarNota(idAlumno)) + " </td> " +
 
-                    VReporteCursoEspesfifico += "<!----tabla 2-->\n" +
-                            "<table class=\"steelBlueCols\">\n" +
-                            "<thead>\n" +
-                            "   <tr> <th>Carne Personal</th> " +
-                            "<th>Nombre  </th> " +
-                            "<th> Nota </th>" +
-                            "<th>Estatus  </th> </tr>" +
-                            "</thead>\n" +
-                            "<tbody>\n" +
-                            "   <tr> <td>" + Carne + "</td>" +
-                            " <td>" + Nombre + " </td> " +
-                            " <td>" + BuscarNota(idAlumno) + " </td> " +
-                            " <td>" + Estatus(BuscarNota(idAlumno))+ " </td> " +
-
-                            "</tbody>\n" +
-                            "</table>\n" +
-                            " <!----termina tabla 2-->";
+                        "</tbody>\n" +
+                        "</table>\n" +
+                        " <!----termina tabla 2-->";
 
 
             }
@@ -1336,7 +1402,7 @@ public class main {
 
     public static String VReporteCursoEspesfifico = "";
     ///Crea el Reporte de Curso Especifico <----------------------------------------Reporte  Cruso Esfico
-    
+
     public static void ReporteCursoEspecifico() {
         VReporteCursoEspesfifico += "<table class=\"steelBlueCols\">";
         VReporteCursoEspesfifico += "<thead><tr>"
