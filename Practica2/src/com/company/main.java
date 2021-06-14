@@ -35,6 +35,7 @@ public class main {
 
     //MAIN
     public static void main(String[] args) {
+
         Menu();
 
 
@@ -299,7 +300,7 @@ public class main {
                     break;
                 case "8":
                     System.out.println("--Reportar--");
-
+                    CrearReporteTop ();
                     CrearReporteAlunos();
                     CrearReporteGeneralCursoss();
                     ReporteCursoEspecifico();
@@ -386,7 +387,7 @@ public class main {
                     break;
                 }
                 if (Datos[3].matches(".[!#$%&()=¿)].*")) {
-                    VariableParaGuardarLog +="Linea " + contLineas + "  Error en Fecha de NAcimiento Caracter incorrecto\n";
+                    VariableParaGuardarLog += "Linea " + contLineas + "  Error en Fecha de NAcimiento Caracter incorrecto\n";
                     contLineas++;
                     break;
                 }
@@ -561,7 +562,7 @@ public class main {
                     continue;
                 }
                 if (Datos[3].matches(".[!#$%&()=¿)].*")) {
-                    VariableParaGuardarLogProfes +="Linea " + contLineas + "  Error en Fecha de NAcimiento Caracter incorrecto\n";
+                    VariableParaGuardarLogProfes += "Linea " + contLineas + "  Error en Fecha de NAcimiento Caracter incorrecto\n";
                     contLineas++;
                     continue;
                 }
@@ -569,14 +570,15 @@ public class main {
                     VariableParaGuardarLogProfes += "Linea  " + contLineas + "  Error en id GEenero  incorrecto\n";
                     contLineas++;
                     continue;
-                } if (Datos[5].matches(".[!#$%&()=¿)].*")) {
+                }
+                if (Datos[5].matches(".[!#$%&()=¿)].*")) {
                     VariableParaGuardarLogProfes += "Linea  " + contLineas + "  Error en id GEenero  incorrecto\n";
                     contLineas++;
                     continue;
                 }
                 //Verificar Carne
                 for (int i = 0; i < contadorProfe; i++) {
-                    if (Datos[1].equals( profesores[i]. getRegistroPersonal())) {
+                    if (Datos[1].equals(profesores[i].getRegistroPersonal())) {
                         VariableParaGuardarLogProfes += "Linea  " + contLineas + "  Error en Registro Personal caracter  incorrecto\n";
                         break;
                     }
@@ -595,7 +597,7 @@ public class main {
                     String Genero = Datos[5];
                     boolean RpRepetido = false;
                     for (int i = 0; i < contadorProfe; i++) {
-                        if (Registro_de_Personal == profesores[i]. getRegistroPersonal()) {
+                        if (Registro_de_Personal == profesores[i].getRegistroPersonal()) {
 
                             RpRepetido = true;
 
@@ -634,8 +636,6 @@ public class main {
                         contLineas++;
                         continue;
                     }
-
-
 
 
                     //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
@@ -677,8 +677,8 @@ public class main {
             }
 
         }
-        for (int i =0;i<contadorProfe;i++){
-            System.out.println(profesores[i].getId()+"|"+profesores[i].getNombre());
+        for (int i = 0; i < contadorProfe; i++) {
+            System.out.println(profesores[i].getId() + "|" + profesores[i].getNombre());
         }
 
     }
@@ -798,13 +798,6 @@ public class main {
             br = new BufferedReader(fr);
 
 
-
-
-
-
-
-
-
             // LEYENDO EL ARCHIVO
             // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
             //antes de la lectura
@@ -820,8 +813,6 @@ public class main {
                 Datos[0] = Datos[0].replaceAll(" ", "");
                 Datos[1] = Datos[1].replaceAll(" ", "");
                 ;
-
-
 
 
                 if (Datos[0].matches(".[/!#$%&/()=¿) ].*")) {
@@ -843,11 +834,6 @@ public class main {
                 //Verificar Carne
 
 
-
-
-
-
-
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
                 //necesario convertimos los datos
@@ -856,13 +842,13 @@ public class main {
                     int id = Integer.parseInt(Datos[0]);
                     int codigo = Integer.parseInt(Datos[1]);
                     String nombre = Datos[2];
-                    boolean ids=false;
-                    for (int i =0;i<contadorCursos;i++){
-                        if (id==curso[i].getId()){
-                            ids=true;
+                    boolean ids = false;
+                    for (int i = 0; i < contadorCursos; i++) {
+                        if (id == curso[i].getId()) {
+                            ids = true;
                         }
                     }
-                    if (ids){
+                    if (ids) {
                         VLogCurso += "Linea : " + contLineas + " Error  en id Repetido  incorrecto\n";
                         contLineas++;
                         continue;
@@ -890,7 +876,6 @@ public class main {
                         contLineas++;
                         continue;
                     }
-
 
 
                     //Con nuestros datos, Alumno crear un objeto de tipo Alumno
@@ -1024,6 +1009,7 @@ public class main {
             }
 
         }
+
     }
 
     public static void mostrarNotas() {
@@ -1630,14 +1616,14 @@ public class main {
 
     //-------------------------------------------------
     //Creado LogAlumnos  <------------------------------------------------------Log
-    static String VariableParaGuardarLog="";
+    static String VariableParaGuardarLog = "";
 
 
     public static void CrearReporLogAlumnos() {
         System.out.println("SE DETERCTARON ERRORES LOS PUEDE VER EN logALUMNOS.csv\n ");
-        VariableParaGuardarLog +=" REPORET DE LOG Alumnos\n";
-        String date= new Date().toString();
-        VariableParaGuardarLog +="Fecha / Hora "+date +"\n";
+        VariableParaGuardarLog += " REPORET DE LOG Alumnos\n";
+        String date = new Date().toString();
+        VariableParaGuardarLog += "Fecha / Hora " + date + "\n";
         try {
 
             FileWriter archivo = new FileWriter("logALUMNOS.csv");
@@ -1648,13 +1634,15 @@ public class main {
 
         }
     }
+
     //Creado Profesores  <------------------------------------------------------Log
-    static String VariableParaGuardarLogProfes="";
+    static String VariableParaGuardarLogProfes = "";
+
     public static void CrearReporLogProfesores() {
         System.out.println("SE DETERCTARON ERRORES LOS PUEDE VER EN logProfesoresS.csv\n ");
-        VariableParaGuardarLogProfes +=" REPORET DE LOG Alumnos\n";
-        String date= new Date().toString();
-        VariableParaGuardarLogProfes +="Fecha / Hora "+date +"\n";
+        VariableParaGuardarLogProfes += " REPORET DE LOG Alumnos\n";
+        String date = new Date().toString();
+        VariableParaGuardarLogProfes += "Fecha / Hora " + date + "\n";
         try {
 
             FileWriter archivo = new FileWriter("logPROFESORES.csv");
@@ -1667,12 +1655,13 @@ public class main {
     }
 
     //Crear log Cusos
-    static String VLogCurso="";
+    static String VLogCurso = "";
+
     public static void CrearReporLogCursos() {
         System.out.println("SE DETERCTARON ERRORES LOS PUEDE VER EN logCUROSS.csv\n ");
-        VLogCurso +=" REPORET DE LOG Alumnos\n";
-        String date= new Date().toString();
-        VLogCurso +="Fecha / Hora "+date +"\n";
+        VLogCurso += " REPORET DE LOG Alumnos\n";
+        String date = new Date().toString();
+        VLogCurso += "Fecha / Hora " + date + "\n";
         try {
 
             FileWriter archivo = new FileWriter("logCURSOS.csv");
@@ -1683,7 +1672,152 @@ public class main {
 
         }
     }
+    //Crear Top Alumnos<-------------------------------------------------TopAlumnos
+    static String VReporteTopNotas="";
+    public static void Ordenar(int CodCurso) {
+
+        double n[] = new double[notas.length];
+
+        for (int i = 0; i < notas.length; i++) {
+            if (notas[i] != null) {
+                n[i] = notas[i].getNota();
+            } else {
+                break;
+            }
+
+        }
+        for (int j = 0; j < n.length; j++) {
+
+            for (int i = 0; i < n.length - 1; i++) {
+                if (n[i] > n[i + 1]) {
+                    double aux = n[i];
+                    n[i] = n[i + 1];
+                    n[i + 1] = aux;
+                }
+            }
+
+        }
+        int cont=0;
+        for(int contador=n.length-1; contador>=0; contador--){
+
+            System.out.println(n[contador]);
+
+            int IdCurso=BuscarCursoNotas(n[contador]);
+            int CodigoCuurso=BuscarCodigodeCurso(IdCurso);
+            System.out.println(CodCurso+"||"+CodigoCuurso);
+            if (CodCurso==CodigoCuurso){
+                int idAlumno  =BuscaridAlumnoNotas(n[contador]);
+                System.out.println(BuscarNombreAlumnos(idAlumno));
+                //----Reportando
+
+                VReporteTopNotas += "<!----tabla 2-->\n" +
+                        "<table class=\"steelBlueCols\">\n" +
+                        "<thead>\n" +
+                        "   <tr> <th>Carnet del Alumno</th> " +
+                        "<th>Nombre del Alumno  </th> " +
+                        "<th> Nota del Alumno </th>" +
+                        "</thead>\n" +
+                        "<tbody>\n" +
+                        "   <tr> <td>" +BuscarCarneAlumno(idAlumno)+"</td>" +
+                        " <td>" + BuscarNombreAlumnos(idAlumno) +" </td> " +
+                        " <td>" +n[contador] +" </td> " +
+                        "</tbody>\n" +
+                        "</table>\n" +
+                        " <!----termina tabla 2-->";
+
+
+
+
+
+
+
+
+
+
+
+                //---------
+
+            }
+            if (cont==10){
+                break;
+            }else{
+                cont++;
+            }
+
+        }
+
+    }
+    public static int  BuscarCursoNotas(double nota){
+        for (int i=0;i<contadorNotas;i++){
+            if (nota==notas[i].getNota()){
+                return notas[i].getIdcurso();
+            }
+        }
+        return 0;
+    }
+
+    public static int  BuscaridAlumnoNotas(double nota){
+        for (int i=0;i<contadorNotas;i++){
+            if (nota==notas[i].getNota()){
+                return notas[i].getIdalumno();
+            }
+        }
+        return 0;
+    }
+
+    public static void EncabezadoReporteTopNotas(){
+        System.out.println("Por favor ingrese el códdigo del curso");
+        int codigo = sc.nextInt();
+     int cursoId = BuscarIdCurso(codigo);
+          String cursoNombre = BuscarNombreCurso(cursoId);
+        System.out.println(cursoId);
+        System.out.println(cursoNombre);
+
+        VReporteTopNotas += "<table class=\"steelBlueCols\">";
+        VReporteTopNotas += "<thead><tr>"
+                + "<th>  " + "Curso" + "</th>"
+                + "<th>  " + codigo + "</th>"
+                + "<th>  " + cursoNombre + "</th>"
+
+
+                + "</tr> "
+                + "</ thead ></table>";
+        int idPrfe = BuscarIdProfe(cursoId);
+        String ProfeNombre = BuscarNombreProfesor(idPrfe);
+        int ProfeRegistro = BuscarRegistroPersonal(idPrfe);
+        VReporteTopNotas += "<table class=\"steelBlueCols\">";
+        VReporteTopNotas += "<thead><tr>"
+                + "<th>  " + "Profesor" + "</th>"
+                + "<th>  " + ProfeNombre + "</th>"
+                + "<th>  " + ProfeRegistro + "</th>"
+                + "</tr> "
+                + "</ thead ></table>";
+
+        System.out.println(codigo);
+        Ordenar(codigo);
+        System.out.println("sale Encabezado ");
+    }
+    public static void CrearReporteTop (){
+        variableReporte();
+
+        VReporteTopNotas += "<table class=\"steelBlueCols\">";
+        VReporteTopNotas += "<thead><tr>"
+                + "<th>  " + "REPORTE TOP NOTAS" + "</th>"
+                + "<th>  " + new Date().toString() + "</th>"
+                + "</tr> "
+                + "</ thead ></table>";
+        EncabezadoReporteTopNotas();
+        try {
+            FileWriter archivo = new FileWriter("ReporteTop.html");
+            archivo.write(ReporteInicio + VReporteTopNotas + ReporteFinal);
+            archivo.close();
+        } catch (Exception e) {
+
+        }
+    }
 
 
     //
+
+
 }
