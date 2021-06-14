@@ -1,13 +1,6 @@
 package com.company;
-
-import com.sun.javafx.binding.StringFormatter;
-
-import javax.xml.crypto.Data;
 import java.io.*;
-
-import java.text.BreakIterator;
 import java.util.Date;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class main {
@@ -36,34 +29,20 @@ public class main {
     //MAIN
     public static void main(String[] args) {
 
-        Menu();
-
-
+        login();
     }
 
     public static void login() {
         if (verif()) {
             if (posicion == 0) {
-                System.out.println("Menu de admin");
+                System.out.println("Menú de Admin");
                 Menu();
-               /* CargarCursos();
-                mostrarCursos();
-                CargarNotas();
-                mostrarNotas();
-                AsiganacionProf();
-                mostrarAsiganicionProf();*/
-                // CrearReporteCursos();
             } else {
-                System.out.println("Menu de usuario");
+                System.out.println("Menú de Usuario");
                 Menu2();
-               /* mostrarCursos();
-                mostrarNotas();
-                mostrarAsiganicionProf();*/
-                // CrearReporteCursos();
-
             }
         } else {
-            System.out.println("Ingreso denegado");
+            System.out.println("Ingreso denegado, ¿Quién eres >:?");
             System.out.println();
             login();
         }
@@ -102,7 +81,6 @@ public class main {
     }
 
 
-    // public static int nuevousuario=0;
     public static void nuevousuario()//CREACION DE UN NUEVO USUARIO, Y VERIFICACION DE QUE NO EXISTA EL NUEVO USUARIO
     {
         System.out.println("Ingrese Nuevo Nombre de Usuario");
@@ -159,23 +137,18 @@ public class main {
             String Op = sc.nextLine();
             switch (Op) {
                 case "1":
-
-
                     submenu();
-
-
                     break;
                 case "2":
                     login();
 
                     break;
                 case "3":
+                    System.out.println("Gracias por usar el Programa, vuelva pronto :)");
                     System.exit(12);
                     break;
-
-
                 default:
-                    System.out.println("ERROR: OPCION INVALIDA ");
+                    System.out.println("ERROR: OPCION INVALIDA :(");
                     System.out.println();
                     break;
             }
@@ -187,7 +160,7 @@ public class main {
         boolean flag = true;
         do {
             //Opciones del Menu
-            System.out.println("--REPORTES");
+            System.out.println("******REPORTES******");
 
             System.out.println("1.Reporte de Alumnos");
             System.out.println("2.Reporte de Asignación de alumnos");
@@ -200,29 +173,32 @@ public class main {
             String Op = sc.nextLine();
             switch (Op) {
                 case "1":
-                    ReportandoAlumnos();
-
+                    System.out.println("*****Reporte de Alumnos Creado******");
+                    CrearReporteAlunos();
                     break;
                 case "2":
-                    ReportandoAsinacionAlumnos();
-
+                    System.out.println("*****Reporte de Asignación de Alumnos Creado******");
+                    CrearReporteAsignacionAlumnos();
                     break;
                 case "3":
-                    ReportandoAsinacionProfesores();
+                    System.out.println("*****Reporte de Asignación de Profesores Creado******");
+                    CrearReporteAsignacionProfesores();
                     break;
                 case "4":
-                    ReportaandoReporteGeneralCuros();
+                    System.out.println("*****Reporte General de Cursos Creado******");
+                    CrearReporteGeneralCursoss();
                     break;
                 case "5":
-                    //reporte de curso específico
+                    System.out.println("*****Reporte de Curso Específico******");
+                    ReporteCursoEspecifico();
                     break;
                 case "6":
-                    //top 5 de alumnos
+                    System.out.println("*****Reporte de Top 5 Mejores Notas******");
+                    CrearReporteTop();
                     break;
                 case "7":
                     Menu2();
                     break;
-
 
                 default:
                     System.out.println("ERROR: OPCION INVALIDA ");
@@ -238,8 +214,6 @@ public class main {
     public static void Menu() {
         boolean flag = true;
         do {
-
-
             //Opciones del Menu
             System.out.println("---Menu----");
             System.out.println("1.Cargar Alumnos ");
@@ -250,9 +224,8 @@ public class main {
             System.out.println("6.Carga de notas");
             System.out.println("7.Agregar usuario al sistema:");
             System.out.println("8.Reportar");
-            System.out.println("9.Manerjo de Errores  ");
-            System.out.println("10.Cerrar Sesion");
-            System.out.println("11.Salir");
+            System.out.println("9.Cerrar Sesion");
+            System.out.println("10.Salir");
             String Op = sc.nextLine();
             switch (Op) {
                 case "1":
@@ -267,36 +240,43 @@ public class main {
                 case "2":
                     System.out.println("--Cargar Profesores ---");
                     CargarProfesores();
+                    System.out.printf("t----------------------");
+                    mostrarProfesore();
+                    System.out.printf("t----------------------");
                     CrearReporLogProfesores();
                     break;
                 case "3":
                     System.out.println("**Cargar Cursos--");
                     CargarCursos();
-
+                    System.out.printf("t----------------------");
+                    mostrarCursos();
+                    System.out.printf("t----------------------");
+                    CrearReporLogCursos();
                     break;
                 case "4":
                     System.out.println("--Asignar alumnos-- ");
-
                     asignarAlumno();
-                    ReportandoAsinacionAlumnos();
-                    CrearReporteAsignacionAlumnos();
+
                     break;
                 case "5":
                     System.out.println("--Asignar profesores--");
                     AsiganacionProf();
-                    ReportandoAsinacionProfesores();
-                    CrearReporteAsignacionProfesores();
+                    System.out.printf("t----------------------");
+                    mostrarAsiganicionProf();
+
                     break;
                 case "6":
                     System.out.println("--Carga de notas--");
                     CargarNotas();
+                    System.out.printf("t----------------------");
+                    mostrarNotas();
+                    System.out.printf("t----------------------");
+                    CrearReporLogNotas();
 
                     break;
                 case "7":
                     System.out.println("--Agregar usuarios al sistema --");
                     nuevousuario();
-
-
                     break;
                 case "8":
                     System.out.println("--Reportar--");
@@ -304,32 +284,24 @@ public class main {
                     CrearReporteAlunos();
                     CrearReporteGeneralCursoss();
                     ReporteCursoEspecifico();
-
+                    CrearReporteAsignacionProfesores();
+                    CrearReporteAsignacionAlumnos();
                     break;
                 case "9":
-                    System.out.println("--Manejo de Errores -- ");
-                    break;
-
-                case "10":
                     login();
                     break;
-
-
-                case "11":
+                case "10":
                     flag = false;
                     break;
-
                 default:
                     System.out.println("ERROR: OPCION INVALIDA ");
                     System.out.println();
                     break;
             }
-
         } while (flag);
-
     }
 
-    //Cargar Alumons
+    //Cargar Alumnos
     public static void CargarAlumnos() {
         // ruta en donde stael archivo
         String ruta;
@@ -343,17 +315,12 @@ public class main {
 
         try {
             // OBJETOS PARA ABRIR LOS ARCHIVOS
-            // Una libreria no es mas que una clase que ya esta en JAVA,
-            //entonces cuando importamos "librerias"
-            // Estamos importando una clase
             archivo = new File(ruta);
 
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
 
             // LEYENDO EL ARCHIVO
-            // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
-            //antes de la lectura
             String linea = br.readLine();
             int contLineas = 1;
             while ((linea = br.readLine()) != null) {
@@ -364,7 +331,7 @@ public class main {
                 // Separando los datos por una coma
                 String[] Datos = linea.split(",");
 
-
+                //Validaciones para el log
                 Datos[0] = Datos[0].replaceAll(" ", "");
                 Datos[1] = Datos[1].replaceAll(" ", "");
                 Datos[3] = Datos[3].replaceAll(" ", "");
@@ -462,13 +429,7 @@ public class main {
                     Alumno nuevo = new Alumno(id, Carne, nombre, Fnac, Genero);
                     //agregamos este objeto a nuestro arreglo
                     alumnos[contadorAlumnos] = nuevo;
-                    //EscribirPokemon(pokemons);
-                    //y aumentamos a uno nuestro contador de pokemones;
                     contadorAlumnos++;
-
-
-                    //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
-
 
                 } catch (Exception e) {
                     System.out.println(e.toString());
@@ -519,17 +480,13 @@ public class main {
 
         try {
             // OBJETOS PARA ABRIR LOS ARCHIVOS
-            // Una libreria no es mas que una clase que ya esta en JAVA,
-            //entonces cuando importamos "librerias"
-            // Estamos importando una clase
+
             archivo = new File(ruta);
 
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
 
             // LEYENDO EL ARCHIVO
-            // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
-            //antes de la lectura
             String linea = br.readLine();
             int contLineas = 1;
             while ((linea = br.readLine()) != null) {
@@ -637,14 +594,9 @@ public class main {
                         continue;
                     }
 
-
-                    //Con nuestros datos, com.company.Alumno crear un objeto de tipo com.company.Alumno
-
                     Profesor nuevo = new Profesor(id, Registro_de_Personal, nombre, Fnac, FContrato, Genero);
                     //agregamos este objeto a nuestro arreglo
                     profesores[contadorProfe] = nuevo;
-                    //EscribirPokemon(pokemons);
-                    //y aumentamos a uno nuestro contador de pokemones;
                     contadorProfe++;
                 } catch (Exception e) {
                     System.out.println(e.toString());
@@ -658,8 +610,6 @@ public class main {
                     }
 
                 }
-
-
             }
         } catch (Exception e) {
             System.out.println("Ruta No Encontrasa :(");
@@ -682,7 +632,15 @@ public class main {
         }
 
     }
-
+    //Método Mostrar Profesores
+    public static void mostrarProfesore(){
+        System.out.println("Mostrando Todos los Datos Dentro Del Objeto ");
+        for (int i = 0; i < contadorProfe; i++) {
+            System.out.println("ID : " +profesores[i].getId() + "   Nombre : " + profesores[i].getNombre() + " Registro Personal :"
+                    + profesores[i].getRegistroPersonal() + " Genero : " + profesores[i].getGenero() + "Fecha Contrato : " + profesores[i].getFContrato());
+        }
+    }
+    //Método Mostrar Alumnos
     public static void mostrarAlumons() {
         System.out.println("Mostrando Todos los Datos Dentro Del Objeto ");
         for (int i = 0; i < contadorAlumnos; i++) {
@@ -690,10 +648,10 @@ public class main {
                     + alumnos[i].getCarne() + " Genero : " + alumnos[i].getGenero());
         }
     }
-
+    //Método Asignar Alumno
     public static void asignarAlumno() {
 
-        // ruta en donde stael archivo
+        // ruta en donde esta el archivo
         String ruta;
         System.out.println("Ingrese la ruta del archivo csv a leer ;");
 
@@ -704,18 +662,12 @@ public class main {
         BufferedReader br = null;
 
         try {
-            // OBJETOS PARA ABRIR LOS ARCHIVOS
-            // Una libreria no es mas que una clase que ya esta en JAVA,
-            //entonces cuando importamos "librerias"
-            // Estamos importando una clase
             archivo = new File(ruta);
 
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
 
             // LEYENDO EL ARCHIVO
-            // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
-            //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
                 int contLineas = 2;
@@ -733,14 +685,9 @@ public class main {
                     int idAlumon = Integer.parseInt(Datos[0]);
                     int idProfesor = Integer.parseInt(Datos[1]);
 
-
-                    //Con nuestros datos, com.company.AsignarAlumno crear un objeto de tipo com.company.AsignarAlumno
-
                     AsignarAlumno nuevo = new AsignarAlumno(idAlumon, idProfesor);
                     //agregamos este objeto a nuestro arreglo
                     AsignacionesAlumnos[contadorAsignacionAlunos] = nuevo;
-                    //EscribirPokemon(pokemons);
-                    //y aumentamos a uno nuestro contador de pokemones;
                     contadorAsignacionAlunos++;
                 } catch (Exception e) {
                     System.out.println(e.toString());
@@ -753,8 +700,6 @@ public class main {
                         System.out.println(DErr[1] + " No es un Numero ");
                     }
                 }
-
-
             }
         } catch (Exception e) {
             System.out.println("Ruta No Encontrasa :(");
@@ -773,9 +718,8 @@ public class main {
 
         }
 
-
     }
-
+    //Método Cargar Cursos
     public static void CargarCursos() {
         // ruta en donde stael archivo
         String ruta;
@@ -789,9 +733,6 @@ public class main {
 
         try {
             // OBJETOS PARA ABRIR LOS ARCHIVOS
-            // Una libreria no es mas que una clase que ya esta en JAVA,
-            //entonces cuando importamos "librerias"
-            // Estamos importando una clase
             archivo = new File(ruta);
 
             fr = new FileReader(archivo);
@@ -799,8 +740,6 @@ public class main {
 
 
             // LEYENDO EL ARCHIVO
-            // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
-            //antes de la lectura
             String linea = br.readLine();
             int contLineas = 1;
             while ((linea = br.readLine()) != null) {
@@ -831,12 +770,8 @@ public class main {
                     continue;
                 }
 
-                //Verificar Carne
 
 
-                // Segun la estructura del archivo, sabemos que como vienen los datos:
-                // Recordemos que estos datos son string, entonces si es
-                //necesario convertimos los datos
                 try {
                     contLineas++;
                     int id = Integer.parseInt(Datos[0]);
@@ -879,12 +814,9 @@ public class main {
 
 
                     //Con nuestros datos, Alumno crear un objeto de tipo Alumno
-
                     Cursos nuevo = new Cursos(id, codigo, nombre);
                     //agregamos este objeto a nuestro arreglo
                     curso[contadorCursos] = nuevo;
-                    //EscribirPokemon(pokemons);
-                    //y aumentamos a uno nuestro contador de pokemones;
                     contadorCursos++;
                 } catch (Exception e) {
                     System.out.println(e.toString());
@@ -919,7 +851,7 @@ public class main {
         CrearReporLogCursos();
         mostrarCursos();
     }
-
+    //Método Mostrar Cursos
     public static void mostrarCursos() {
         System.out.println("Mostrando Todos los Datos Dentro Del Objeto ");
         for (int i = 0; i < contadorCursos; i++) {
@@ -927,7 +859,7 @@ public class main {
                     + curso[i].getCodigo());
         }
     }
-
+    //Método Cargar Notas
     public static void CargarNotas() {
         // ruta en donde stael archivo
         String ruta;
@@ -941,17 +873,12 @@ public class main {
 
         try {
             // OBJETOS PARA ABRIR LOS ARCHIVOS
-            // Una libreria no es mas que una clase que ya esta en JAVA,
-            //entonces cuando importamos "librerias"
-            // Estamos importando una clase
             archivo = new File(ruta);
 
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
 
             // LEYENDO EL ARCHIVO
-            // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
-            //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
                 int contLineas = 0;
@@ -960,7 +887,26 @@ public class main {
                 System.out.println(linea);
                 // Separando los datos por una coma
                 String[] Datos = linea.split(",");
+                Datos[0] = Datos[0].replaceAll(" ", "");
+                Datos[1] = Datos[1].replaceAll(" ", "");
+                Datos[2] = Datos[2].replaceAll(" ", "");
 
+
+                if (Datos[0].matches(".[/!#$%&/()=¿) ].*")) {
+                    VariabledeLog += "Linea " + contLineas + " Error en id Caracter incorrecto\n";
+                    contLineas++;
+                    break;
+                }
+                if (Datos[1].matches(".[/!#$%&/()=¿)].*")) {
+                  VariabledeLog += "Linea " + contLineas + " Error en Carne Caracter incorrecto\n";
+                    contLineas++;
+                    break;
+                }
+                if (Datos[2].matches(".[/!#$%&/()=¿)].*")) {
+                    VariabledeLog += "Linea " + contLineas + " Error en Nombre Caracter incorrecto\n";
+                    contLineas++;
+                    break;
+                }
                 // Segun la estructura del archivo, sabemos que como vienen los datos:
                 // Recordemos que estos datos son string, entonces si es
                 //necesario convertimos los datos
@@ -970,15 +916,28 @@ public class main {
                     int idcurso = Integer.parseInt(Datos[1]);
                     double nota = Double.parseDouble(Datos[2]);
 
-
                     //Con nuestros datos, Alumno crear un objeto de tipo Alumno
+                    if (nota>100) {
+                        continue;
 
-                    Notas nuevo = new Notas(idalumno, idcurso, nota);
-                    //agregamos este objeto a nuestro arreglo
-                    notas[contadorNotas] = nuevo;
-                    //EscribirPokemon(pokemons);
-                    //y aumentamos a uno nuestro contador de pokemones;
-                    contadorNotas++;
+                    }boolean idRepetido = false;
+                    for (int i = 0; i < contadorAlumnos; i++) {
+                        if (idalumno == alumnos[i].getId()) {
+                            idRepetido = true;
+                        }
+                    }
+                    if (idRepetido) {
+                        VariableParaGuardarLog += "Linea : " + contLineas + " Error  en Id Repetido  incorrecto\n";
+                        contLineas++;
+                        continue;
+                    }
+                        Notas nuevo = new Notas(idalumno, idcurso, nota);
+                        //agregamos este objeto a nuestro arreglo
+                        notas[contadorNotas] = nuevo;
+                        contadorNotas++;
+
+
+
                 } catch (Exception e) {
                     System.out.println(e.toString());
                     String error = e.getMessage();
@@ -1011,7 +970,7 @@ public class main {
         }
 
     }
-
+    //Método Mostrar NOtas
     public static void mostrarNotas() {
         System.out.println("Mostrando Todos los Datos Dentro Del Objeto ");
         for (int i = 0; i < contadorNotas; i++) {
@@ -1019,7 +978,7 @@ public class main {
                     + notas[i].getNota());
         }
     }
-
+    //Método Asiganar Profesores
     public static void AsiganacionProf() {
         // ruta en donde stael archivo
         String ruta;
@@ -1033,17 +992,12 @@ public class main {
 
         try {
             // OBJETOS PARA ABRIR LOS ARCHIVOS
-            // Una libreria no es mas que una clase que ya esta en JAVA,
-            //entonces cuando importamos "librerias"
-            // Estamos importando una clase
             archivo = new File(ruta);
 
             fr = new FileReader(archivo);
             br = new BufferedReader(fr);
 
             // LEYENDO EL ARCHIVO
-            // Hack: si el archivo tiene encabezado, utilizar un br.readLine()
-            //antes de la lectura
             String linea = br.readLine();
             while ((linea = br.readLine()) != null) {
                 int contLineas = 1;
@@ -1067,8 +1021,6 @@ public class main {
                     AsignarProfe nuevo = new AsignarProfe(idProf, idCurso);
                     //agregamos este objeto a nuestro arreglo
                     asignarProfes[asignarprofcont] = nuevo;
-                    //EscribirPokemon(pokemons);
-                    //y aumentamos a uno nuestro contador de pokemones;
                     asignarprofcont++;
                 } catch (Exception e) {
                     System.out.println(e.toString());
@@ -1082,8 +1034,6 @@ public class main {
                     }
 
                 }
-
-
             }
         } catch (Exception e) {
             System.out.println("Ruta No Encontrada :(");
@@ -1102,7 +1052,7 @@ public class main {
 
         }
     }
-
+    //Método que muestra la Asignación de Profesores
     public static void mostrarAsiganicionProf() {
         System.out.println("Mostrando Todos los Datos Dentro Del Objeto ");
         for (int i = 0; i < asignarprofcont; i++) {
@@ -1234,6 +1184,7 @@ public class main {
                 + "<th>  " + new Date().toString() + "</th>"
                 + "</tr> "
                 + "</ thead ></table>";
+        ReportandoAsinacionAlumnos();
         try {
 
             FileWriter archivo = new FileWriter("ReporteAsignacionAlumnos.html");
@@ -1273,7 +1224,7 @@ public class main {
 
 
     }
-
+//Reporte de Asignación de Usuarios
     public static void CrearReporteAsignacionProfesores() {
         variableReporte();
 
@@ -1322,6 +1273,7 @@ public class main {
     }
 
     //-------------------------------------------------------------------------
+    //Métodos utilizados en los reportes
     public static String BuscarNombreAlumnos(int id) {
         for (int i = 0; i < contadorAlumnos; i++) {
             if (alumnos[i].getId() == id) {
@@ -1617,6 +1569,7 @@ public class main {
     //-------------------------------------------------
     //Creado LogAlumnos  <------------------------------------------------------Log
     static String VariableParaGuardarLog = "";
+    static String VariabledeLog = "";
 
 
     public static void CrearReporLogAlumnos() {
@@ -1628,6 +1581,21 @@ public class main {
 
             FileWriter archivo = new FileWriter("logALUMNOS.csv");
             archivo.write(ReporteInicio + VariableParaGuardarLog + ReporteFinal);
+            archivo.close();
+
+        } catch (Exception e) {
+
+        }
+    }
+    public static void CrearReporLogNotas() {
+        System.out.println("SE DETERCTARON ERRORES LOS PUEDE VER EN logNOTAS.csv\n ");
+        VariabledeLog += " REPORET DE LOG Notas\n";
+        String date = new Date().toString();
+        VariabledeLog += "Fecha / Hora " + date + "\n";
+        try {
+
+            FileWriter archivo = new FileWriter("logNOTAS.csv");
+            archivo.write(ReporteInicio + VariabledeLog + ReporteFinal);
             archivo.close();
 
         } catch (Exception e) {
@@ -1654,7 +1622,7 @@ public class main {
         }
     }
 
-    //Crear log Cusos
+    //Crear log Cursos
     static String VLogCurso = "";
 
     public static void CrearReporLogCursos() {
@@ -1815,9 +1783,5 @@ public class main {
 
         }
     }
-
-
-    //
-
 
 }
